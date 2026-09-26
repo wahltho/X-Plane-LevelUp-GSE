@@ -1,0 +1,1014 @@
+{
+  "schema": 1,
+  "method": {
+    "door": "read-only geometric measurement of the animated LevelUp fuselage door leaf; coordinates are not reused in asset geometry",
+    "attitude": "flat-ground line through estimated nose/main tire contact points after ACF strut-curve deflection",
+    "loading": "operating empty, midpoint mass, maximum nominal CG, and maximum at declared forward/aft CG limits",
+    "limitations": [
+      "ACF spring-curve calculation is a static analytical estimate, not simulator physics output",
+      "forces beyond the declared max-weight force use linear curve extrapolation and are flagged per row",
+      "tire deformation and uneven terrain are not estimated"
+    ],
+    "gse_geometry_source": {
+      "path": "/Users/wahltho/Documents/Projects/Zibo Mod/zibomod/gse_geometry.inc",
+      "sha256": "dd940506eac2968f1207c0037b724a78cbed9bb99119469163fb957d3823721f"
+    }
+  },
+  "family_selection": {
+    "fit_tolerance_m": 0.1,
+    "measured_height_range_m": [
+      2.572881639610486,
+      3.1063911393021417
+    ],
+    "continuous_span_m": 0.5335094996916556,
+    "lower_bound_model_count": 3,
+    "selected_platform_heights_m": [
+      2.65,
+      2.85,
+      3.05
+    ],
+    "all_cases_covered": true
+  },
+  "variants": [
+    {
+      "variant": "737-600",
+      "acf": {
+        "path": "/Users/wahltho/dev/Zibo Mod/Original/737NG Series_V2.S1.50A/737_60NG.acf",
+        "sha256": "670cf299de16faf15fc152e7c8affa0d9f60f2c6c0e047f59849bb5e8a0ba1e3"
+      },
+      "fuselage_obj": {
+        "path": "/Users/wahltho/dev/Zibo Mod/Original/737NG Series_V2.S1.50A/objects/737_60NG/737_60NG_fuselage.obj",
+        "sha256": "a3c31b96e462aef3d56112fe68e2278c33a1ec6b3bfa9ebd9d9127b627a57da2"
+      },
+      "door_thresholds": {
+        "L1": {
+          "xyz_m": [
+            -1.6702270000000001,
+            -0.397705,
+            5.0562055
+          ],
+          "source_vertex_count": 4,
+          "source_tris_range": [
+            9465,
+            744
+          ],
+          "method": "midpoint of the lowest edge of the largest animated door-leaf mesh"
+        },
+        "L2": {
+          "xyz_m": [
+            -1.3701376666666667,
+            -0.425507,
+            23.72525
+          ],
+          "source_vertex_count": 3,
+          "source_tris_range": [
+            25566,
+            792
+          ],
+          "method": "midpoint of the lowest edge of the largest animated door-leaf mesh"
+        }
+      },
+      "scenarios": [
+        {
+          "id": "operating-empty",
+          "weight_lb": 80199.78,
+          "cg_z_ft": 46.040000916,
+          "gear_reaction_lbf": {
+            "nose": 8265.96126704829,
+            "main_each": 35966.909366475855
+          },
+          "strut_deflection_ft": {
+            "nose": 0.6894027694878787,
+            "main": 0.9215982000583378
+          },
+          "strut_estimate_mode": {
+            "nose": "below-preload linear estimate",
+            "main": "declared curve interpolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.7393304052558394,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.08933040525583946,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.9700162830835892,
+              "selected_platform_height_m": 3.05,
+              "signed_contact_residual_m": 0.0799837169164106,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "mid-load",
+          "weight_lb": 102349.79000000001,
+          "cg_z_ft": 46.040000916,
+          "gear_reaction_lbf": {
+            "nose": 10548.899259206526,
+            "main_each": 45900.445370396745
+          },
+          "strut_deflection_ft": {
+            "nose": 0.8798057635881644,
+            "main": 1.1417651592441902
+          },
+          "strut_estimate_mode": {
+            "nose": "below-preload linear estimate",
+            "main": "declared curve interpolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.680576631278864,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.03057663127886423,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.89591226263589,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": -0.04591226263588988,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-nominal-cg",
+          "weight_lb": 124499.8,
+          "cg_z_ft": 46.040000916,
+          "gear_reaction_lbf": {
+            "nose": 12831.837251364761,
+            "main_each": 55833.98137431762
+          },
+          "strut_deflection_ft": {
+            "nose": 1.0246257799974972,
+            "main": 1.3619321184300426
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.6345958947821337,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": 0.01540410521786617,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.811070603452515,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": 0.03892939654748506,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-forward-cg",
+          "weight_lb": 124499.8,
+          "cg_z_ft": 43.779998779,
+          "gear_reaction_lbf": {
+            "nose": 20606.63166706887,
+            "main_each": 51946.58416646557
+          },
+          "strut_deflection_ft": {
+            "nose": 1.2520660062214342,
+            "main": 1.2757718204190889
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.572881639610486,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": 0.07711836038951381,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.91107648665526,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": -0.06107648665526,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-aft-cg",
+          "weight_lb": 124499.8,
+          "cg_z_ft": 47.5,
+          "gear_reaction_lbf": {
+            "nose": 7809.190352329388,
+            "main_each": 58345.30482383531
+          },
+          "strut_deflection_ft": {
+            "nose": 0.65130688161044,
+            "main": 1.417593108352885
+          },
+          "strut_estimate_mode": {
+            "nose": "below-preload linear estimate",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.7376701291442203,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.08767012914422034,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.6928610169071745,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.04286101690717459,
+              "within_tolerance": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "variant": "737-700",
+      "acf": {
+        "path": "/Users/wahltho/dev/Zibo Mod/Original/737NG Series_V2.S1.50A/737_70NG.acf",
+        "sha256": "29e5a8898eff46cb586824904c7fc0ed5912b342ee4348589057e11ad7f984f3"
+      },
+      "fuselage_obj": {
+        "path": "/Users/wahltho/dev/Zibo Mod/Original/737NG Series_V2.S1.50A/objects/737_70NG/737_70NG_fuselage.obj",
+        "sha256": "80f62158ce3cd64109fd4dde3917633d149fbb86fd9bf9d6902b617acc83782f"
+      },
+      "door_thresholds": {
+        "L1": {
+          "xyz_m": [
+            -1.6702270000000001,
+            -0.397705,
+            5.0562055
+          ],
+          "source_vertex_count": 4,
+          "source_tris_range": [
+            10173,
+            744
+          ],
+          "method": "midpoint of the lowest edge of the largest animated door-leaf mesh"
+        },
+        "L2": {
+          "xyz_m": [
+            -1.3701376666666667,
+            -0.425507,
+            26.241355499999997
+          ],
+          "source_vertex_count": 3,
+          "source_tris_range": [
+            26994,
+            792
+          ],
+          "method": "midpoint of the lowest edge of the largest animated door-leaf mesh"
+        }
+      },
+      "scenarios": [
+        {
+          "id": "operating-empty",
+          "weight_lb": 82999.61,
+          "cg_z_ft": 49.740001678,
+          "gear_reaction_lbf": {
+            "nose": 9993.865950625985,
+            "main_each": 36502.87202468701
+          },
+          "strut_deflection_ft": {
+            "nose": 0.6783678115795732,
+            "main": 0.8126081755440893
+          },
+          "strut_estimate_mode": {
+            "nose": "below-preload linear estimate",
+            "main": "declared curve interpolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.7382183166714738,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.08821831667147384,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 3.0543653439048573,
+              "selected_platform_height_m": 3.05,
+              "signed_contact_residual_m": -0.004365343904857433,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "mid-load",
+          "weight_lb": 118749.755,
+          "cg_z_ft": 49.740001678,
+          "gear_reaction_lbf": {
+            "nose": 14298.490476517636,
+            "main_each": 52225.632261741186
+          },
+          "strut_deflection_ft": {
+            "nose": 0.8110542197007176,
+            "main": 1.0699597142626178
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve interpolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.6951206345748644,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.04512063457486448,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.9470438898583784,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": -0.09704388985837831,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-nominal-cg",
+          "weight_lb": 154499.9,
+          "cg_z_ft": 49.740001678,
+          "gear_reaction_lbf": {
+            "nose": 18603.115002409282,
+            "main_each": 67948.39249879535
+          },
+          "strut_deflection_ft": {
+            "nose": 0.9309876436692456,
+            "main": 1.3273112529811462
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.6556054249736136,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.005605424973613715,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.8367263774415465,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": 0.013273622558453546,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-forward-cg",
+          "weight_lb": 154499.9,
+          "cg_z_ft": 48.240001678,
+          "gear_reaction_lbf": {
+            "nose": 24240.42605353048,
+            "main_each": 65129.73697323476
+          },
+          "strut_deflection_ft": {
+            "nose": 1.0880517528081353,
+            "main": 1.2811752485084091
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.6121078604099046,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": 0.0378921395900953,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.8979210891681317,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": -0.04792108916813165,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-aft-cg",
+          "weight_lb": 154499.9,
+          "cg_z_ft": 51.689998627,
+          "gear_reaction_lbf": {
+            "nose": 11274.622102242394,
+            "main_each": 71612.6389488788
+          },
+          "strut_deflection_ft": {
+            "nose": 0.7268046212570867,
+            "main": 1.3872879649550711
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.712061050862383,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.062061050862383116,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.7570615313531075,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": 0.09293846864689259,
+              "within_tolerance": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "variant": "737-800",
+      "acf": {
+        "path": "/Users/wahltho/dev/Zibo Mod/Original/737NG Series_V2.S1.50A/737_80NG.acf",
+        "sha256": "3da45b7638a245242cdc8d7e0f8b65f92b0f82275b14714eac95005e6c099abf"
+      },
+      "fuselage_obj": {
+        "path": "/Users/wahltho/dev/Zibo Mod/Original/737NG Series_V2.S1.50A/objects/737_80NG/737_80NG_fuselage.obj",
+        "sha256": "4e71b3003aad7cfbe5f0e73c15db99ab8f974223fd397dc681b26e4116a201cd"
+      },
+      "door_thresholds": {
+        "L1": {
+          "xyz_m": [
+            -1.6702270000000001,
+            -0.397705,
+            5.0562055
+          ],
+          "source_vertex_count": 4,
+          "source_tris_range": [
+            9249,
+            744
+          ],
+          "method": "midpoint of the lowest edge of the largest animated door-leaf mesh"
+        },
+        "L2": {
+          "xyz_m": [
+            -1.3701376666666667,
+            -0.425507,
+            31.9352495
+          ],
+          "source_vertex_count": 3,
+          "source_tris_range": [
+            26238,
+            792
+          ],
+          "method": "midpoint of the lowest edge of the largest animated door-leaf mesh"
+        }
+      },
+      "scenarios": [
+        {
+          "id": "operating-empty",
+          "weight_lb": 91514.04,
+          "cg_z_ft": 60.220001221,
+          "gear_reaction_lbf": {
+            "nose": 6978.192036989142,
+            "main_each": 42267.923981505424
+          },
+          "strut_deflection_ft": {
+            "nose": 0.6849003676449621,
+            "main": 1.176273500336904
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve interpolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.7176944301633306,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.06769443016333065,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.9318636911903257,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": -0.08186369119032566,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "mid-load",
+          "weight_lb": 133107.02,
+          "cg_z_ft": 60.220001221,
+          "gear_reaction_lbf": {
+            "nose": 10149.768789918515,
+            "main_each": 61478.62560504074
+          },
+          "strut_deflection_ft": {
+            "nose": 0.7302454751360639,
+            "main": 1.2661014689664398
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve interpolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.703086305705108,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.053086305705108305,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.8935769017843924,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": -0.04357690178439233,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-nominal-cg",
+          "weight_lb": 174700.0,
+          "cg_z_ft": 60.220001221,
+          "gear_reaction_lbf": {
+            "nose": 13321.345542847888,
+            "main_each": 80689.32722857606
+          },
+          "strut_deflection_ft": {
+            "nose": 0.7755905826271656,
+            "main": 1.3559294375959756
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.688475874331971,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.038475874331971305,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.855287318789399,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": -0.00528731878939892,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-forward-cg",
+          "weight_lb": 174700.0,
+          "cg_z_ft": 57.869998932,
+          "gear_reaction_lbf": {
+            "nose": 21452.567601678325,
+            "main_each": 76623.71619916084
+          },
+          "strut_deflection_ft": {
+            "nose": 0.8918454195788901,
+            "main": 1.3369189096534257
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.655437978383316,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.005437978383316278,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.894252418797053,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": -0.04425241879705277,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-aft-cg",
+          "weight_lb": 174700.0,
+          "cg_z_ft": 61.770000458,
+          "gear_reaction_lbf": {
+            "nose": 7958.206942490212,
+            "main_each": 83370.89652875489
+          },
+          "strut_deflection_ft": {
+            "nose": 0.6989119728163592,
+            "main": 1.3684682780659814
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.7102569808995485,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.06025698089954856,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.829574876991099,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": 0.020425123008901203,
+              "within_tolerance": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "variant": "737-900",
+      "acf": {
+        "path": "/Users/wahltho/dev/Zibo Mod/Original/737NG Series_V2.S1.50A/737_90NG.acf",
+        "sha256": "086b18b7996c895b1d6a7e170301bf0e96751fc0b01f0e24386caa7e2982a8d1"
+      },
+      "fuselage_obj": {
+        "path": "/Users/wahltho/dev/Zibo Mod/Original/737NG Series_V2.S1.50A/objects/737_90NG/737_90NG_fuselage.obj",
+        "sha256": "bc7d30b3171ffdc32eec99c3cbcaac044d9606e6edbce794af1f6f63ec297ef2"
+      },
+      "door_thresholds": {
+        "L1": {
+          "xyz_m": [
+            -1.6702270000000001,
+            -0.397705,
+            5.0562055
+          ],
+          "source_vertex_count": 4,
+          "source_tris_range": [
+            11559,
+            744
+          ],
+          "method": "midpoint of the lowest edge of the largest animated door-leaf mesh"
+        },
+        "L2": {
+          "xyz_m": [
+            -1.3701376666666667,
+            -0.425507,
+            34.6633985
+          ],
+          "source_vertex_count": 3,
+          "source_tris_range": [
+            28296,
+            792
+          ],
+          "method": "midpoint of the lowest edge of the largest animated door-leaf mesh"
+        }
+      },
+      "scenarios": [
+        {
+          "id": "operating-empty",
+          "weight_lb": 94580.0,
+          "cg_z_ft": 65.650001526,
+          "gear_reaction_lbf": {
+            "nose": 6648.181849267802,
+            "main_each": 43965.9090753661
+          },
+          "strut_deflection_ft": {
+            "nose": 0.5056764151141181,
+            "main": 0.8313384358499054
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve interpolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.760398036578323,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": 0.08960196342167714,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 3.1063911393021417,
+              "selected_platform_height_m": 3.05,
+              "signed_contact_residual_m": -0.0563911393021419,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "mid-load",
+          "weight_lb": 134640.0,
+          "cg_z_ft": 65.650001526,
+          "gear_reaction_lbf": {
+            "nose": 9464.064328456512,
+            "main_each": 62587.96783577174
+          },
+          "strut_deflection_ft": {
+            "nose": 0.5624837415928053,
+            "main": 1.1167408871181304
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve interpolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.739463447566688,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.089463447566688,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.964626180521787,
+              "selected_platform_height_m": 3.05,
+              "signed_contact_residual_m": 0.08537381947821299,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-nominal-cg",
+          "weight_lb": 174700.0,
+          "cg_z_ft": 65.650001526,
+          "gear_reaction_lbf": {
+            "nose": 12279.94680764522,
+            "main_each": 81210.02659617738
+          },
+          "strut_deflection_ft": {
+            "nose": 0.6192910680714924,
+            "main": 1.4021433383863555
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.718481762290612,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.0684817622906122,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.822801946868894,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": 0.027198053131106015,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-forward-cg",
+          "weight_lb": 174700.0,
+          "cg_z_ft": 63.380001068,
+          "gear_reaction_lbf": {
+            "nose": 19361.040328358744,
+            "main_each": 77669.47983582063
+          },
+          "strut_deflection_ft": {
+            "nose": 0.7621443279039783,
+            "main": 1.3478807706844385
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.678106588321344,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.028106588321344272,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.8866289651502566,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": -0.03662896515025649,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-aft-cg",
+          "weight_lb": 174700.0,
+          "cg_z_ft": 67.879997253,
+          "gear_reaction_lbf": {
+            "nose": 5323.644998089122,
+            "main_each": 84688.17750095544
+          },
+          "strut_deflection_ft": {
+            "nose": 0.4180780477579746,
+            "main": 1.4554496245965074
+          },
+          "strut_estimate_mode": {
+            "nose": "below-preload linear estimate",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.7756746989679484,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": 0.0743253010320517,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.7454410444999855,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.09544104449998558,
+              "within_tolerance": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "variant": "737-900ER",
+      "acf": {
+        "path": "/Users/wahltho/dev/Zibo Mod/Original/737NG Series_V2.S1.50A/737_9ENG.acf",
+        "sha256": "7f2b53652a9e42070e6167f05809513a4b1e018e8c76ef16caa4d0ab00d50e1f"
+      },
+      "fuselage_obj": {
+        "path": "/Users/wahltho/dev/Zibo Mod/Original/737NG Series_V2.S1.50A/objects/737_9ENG/737_9ENG_fuselage.obj",
+        "sha256": "6105a93437d9a73ea77a440f6ffd0eac1eac3df41aca09670e80e37d23eb8a7b"
+      },
+      "door_thresholds": {
+        "L1": {
+          "xyz_m": [
+            -1.6702270000000001,
+            -0.397705,
+            5.0562055
+          ],
+          "source_vertex_count": 4,
+          "source_tris_range": [
+            12723,
+            744
+          ],
+          "method": "midpoint of the lowest edge of the largest animated door-leaf mesh"
+        },
+        "L2": {
+          "xyz_m": [
+            -1.3701376666666667,
+            -0.425507,
+            34.6633985
+          ],
+          "source_vertex_count": 3,
+          "source_tris_range": [
+            29460,
+            792
+          ],
+          "method": "midpoint of the lowest edge of the largest animated door-leaf mesh"
+        }
+      },
+      "scenarios": [
+        {
+          "id": "operating-empty",
+          "weight_lb": 98495.0,
+          "cg_z_ft": 65.800003052,
+          "gear_reaction_lbf": {
+            "nose": 6659.563505737149,
+            "main_each": 45917.71824713142
+          },
+          "strut_deflection_ft": {
+            "nose": 0.4557689362532103,
+            "main": 0.8145792538647995
+          },
+          "strut_estimate_mode": {
+            "nose": "below-preload linear estimate",
+            "main": "declared curve interpolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.7770674349370723,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": 0.07293256506292778,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 3.0999947879407124,
+              "selected_platform_height_m": 3.05,
+              "signed_contact_residual_m": -0.04999478794071255,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "mid-load",
+          "weight_lb": 143097.155,
+          "cg_z_ft": 65.800003052,
+          "gear_reaction_lbf": {
+            "nose": 9675.258553356132,
+            "main_each": 66710.94822332193
+          },
+          "strut_deflection_ft": {
+            "nose": 0.5451470562225871,
+            "main": 1.109645737770725
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve interpolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.7465631065237655,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.09656310652376554,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.9607661866275268,
+              "selected_platform_height_m": 3.05,
+              "signed_contact_residual_m": 0.08923381337247305,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-nominal-cg",
+          "weight_lb": 187699.31,
+          "cg_z_ft": 65.800003052,
+          "gear_reaction_lbf": {
+            "nose": 12690.953600975114,
+            "main_each": 87504.17819951245
+          },
+          "strut_deflection_ft": {
+            "nose": 0.6026086703701223,
+            "main": 1.4047122216766506
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.7252323649763484,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.07523236497634844,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.813829071237336,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": 0.03617092876266392,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-forward-cg",
+          "weight_lb": 187699.31,
+          "cg_z_ft": 63.380001068,
+          "gear_reaction_lbf": {
+            "nose": 20801.682372725303,
+            "main_each": 83448.81381363735
+          },
+          "strut_deflection_ft": {
+            "nose": 0.7571520044202916,
+            "main": 1.3471645433377075
+          },
+          "strut_estimate_mode": {
+            "nose": "declared curve interpolation",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.681538479645616,
+              "selected_platform_height_m": 2.65,
+              "signed_contact_residual_m": -0.03153847964561596,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.8822545107748754,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": -0.03225451077487529,
+              "within_tolerance": true
+            }
+          }
+        },
+        {
+          "id": "maximum-aft-cg",
+          "weight_lb": 187699.31,
+          "cg_z_ft": 67.580001831,
+          "gear_reaction_lbf": {
+            "nose": 6725.219933826348,
+            "main_each": 90487.04503308682
+          },
+          "strut_deflection_ft": {
+            "nose": 0.46026234792540477,
+            "main": 1.4470406155601505
+          },
+          "strut_estimate_mode": {
+            "nose": "below-preload linear estimate",
+            "main": "declared curve linear extrapolation"
+          },
+          "doors": {
+            "L1": {
+              "estimated_sill_height_m": 2.765618812797889,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": 0.08438118720211119,
+              "within_tolerance": true
+            },
+            "L2": {
+              "estimated_sill_height_m": 2.7565855611879684,
+              "selected_platform_height_m": 2.85,
+              "signed_contact_residual_m": 0.09341443881203171,
+              "within_tolerance": true
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

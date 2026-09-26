@@ -1,0 +1,274 @@
+{
+  "schema": 1,
+  "provenance": {
+    "geometry": "independent procedural primitives authored in this repository",
+    "texture": "independent deterministic PIL drawing authored in this repository",
+    "third_party_geometry_or_texture_used": false,
+    "generator": "fallback_stairs/source/generate_fallback_stairs.py",
+    "generator_sha256": "0555f83f658f1de7025709b472484232e1f14cf601c13de9f61d33cf09a46c73"
+  },
+  "family": {
+    "selection_tolerance_m": 0.1,
+    "available_platform_heights_m": [
+      2.65,
+      2.85,
+      3.05
+    ],
+    "common_texture": {
+      "path": "LU_fallback_stairs.png",
+      "size_px": [
+        512,
+        512
+      ],
+      "sha256": "2884157ec713a090bd8a4eb0c227f3452a87fedc7f65860c7f29b0a244d36dd0"
+    }
+  },
+  "models": [
+    {
+      "platform_height_m": 2.65,
+      "riser_count": 14,
+      "riser_height_m": 0.18928571428571428,
+      "tread_depth_m": 0.28,
+      "contact_point_xyz_m": [
+        0.0,
+        2.65,
+        0.0
+      ],
+      "wheel_ground_points_xyz_m": [
+        [
+          -0.62,
+          0.0,
+          -0.64
+        ],
+        [
+          -0.62,
+          0.0,
+          0.64
+        ],
+        [
+          -4.6899999999999995,
+          0.0,
+          -0.64
+        ],
+        [
+          -4.6899999999999995,
+          0.0,
+          0.64
+        ]
+      ],
+      "origin": "ground projection of the platform door-contact centre",
+      "axes": "+X aircraft right, +Y up, +Z aircraft aft; stair run extends along -X",
+      "nominal_heading_deg": 0.0,
+      "id": "stairs_265",
+      "obj8": "LU_fallback_stairs_265.obj",
+      "texture": "LU_fallback_stairs.png",
+      "assigned_levelup_variants": [
+        "737-600",
+        "737-700",
+        "737-800",
+        "737-900",
+        "737-900ER"
+      ],
+      "assigned_doors": [
+        "L1",
+        "L2"
+      ],
+      "assignment_rule": "select only when this is the nearest platform height and absolute live contact residual is <= 0.10 m",
+      "high_lod": {
+        "vertices": 4920,
+        "triangles": 2076,
+        "range_m": [
+          0,
+          220
+        ]
+      },
+      "low_lod": {
+        "vertices": 716,
+        "triangles": 292,
+        "range_m": [
+          220,
+          1500
+        ]
+      },
+      "bounds_xyz_m": [
+        [
+          -5.17,
+          0.0
+        ],
+        [
+          0.0,
+          3.685
+        ],
+        [
+          -0.6960000000000001,
+          0.6960000000000001
+        ]
+      ],
+      "sha256": "08efdd98bc0c7852c379aaad15868eb4b7e302f33ce2274ee32576e1ee179cb3"
+    },
+    {
+      "platform_height_m": 2.85,
+      "riser_count": 15,
+      "riser_height_m": 0.19,
+      "tread_depth_m": 0.28,
+      "contact_point_xyz_m": [
+        0.0,
+        2.85,
+        0.0
+      ],
+      "wheel_ground_points_xyz_m": [
+        [
+          -0.62,
+          0.0,
+          -0.64
+        ],
+        [
+          -0.62,
+          0.0,
+          0.64
+        ],
+        [
+          -4.970000000000001,
+          0.0,
+          -0.64
+        ],
+        [
+          -4.970000000000001,
+          0.0,
+          0.64
+        ]
+      ],
+      "origin": "ground projection of the platform door-contact centre",
+      "axes": "+X aircraft right, +Y up, +Z aircraft aft; stair run extends along -X",
+      "nominal_heading_deg": 0.0,
+      "id": "stairs_285",
+      "obj8": "LU_fallback_stairs_285.obj",
+      "texture": "LU_fallback_stairs.png",
+      "assigned_levelup_variants": [
+        "737-600",
+        "737-700",
+        "737-800",
+        "737-900",
+        "737-900ER"
+      ],
+      "assigned_doors": [
+        "L1",
+        "L2"
+      ],
+      "assignment_rule": "select only when this is the nearest platform height and absolute live contact residual is <= 0.10 m",
+      "high_lod": {
+        "vertices": 4992,
+        "triangles": 2112,
+        "range_m": [
+          0,
+          220
+        ]
+      },
+      "low_lod": {
+        "vertices": 716,
+        "triangles": 292,
+        "range_m": [
+          220,
+          1500
+        ]
+      },
+      "bounds_xyz_m": [
+        [
+          -5.45,
+          0.0
+        ],
+        [
+          0.0,
+          3.8850000000000002
+        ],
+        [
+          -0.6960000000000001,
+          0.6960000000000001
+        ]
+      ],
+      "sha256": "48391141f7a700bf10a2e706fb8bdb44f1e122bc1afe5db27f4a5516e1fdb3d4"
+    },
+    {
+      "platform_height_m": 3.05,
+      "riser_count": 17,
+      "riser_height_m": 0.17941176470588235,
+      "tread_depth_m": 0.28,
+      "contact_point_xyz_m": [
+        0.0,
+        3.05,
+        0.0
+      ],
+      "wheel_ground_points_xyz_m": [
+        [
+          -0.62,
+          0.0,
+          -0.64
+        ],
+        [
+          -0.62,
+          0.0,
+          0.64
+        ],
+        [
+          -5.530000000000001,
+          0.0,
+          -0.64
+        ],
+        [
+          -5.530000000000001,
+          0.0,
+          0.64
+        ]
+      ],
+      "origin": "ground projection of the platform door-contact centre",
+      "axes": "+X aircraft right, +Y up, +Z aircraft aft; stair run extends along -X",
+      "nominal_heading_deg": 0.0,
+      "id": "stairs_305",
+      "obj8": "LU_fallback_stairs_305.obj",
+      "texture": "LU_fallback_stairs.png",
+      "assigned_levelup_variants": [
+        "737-600",
+        "737-700",
+        "737-800",
+        "737-900",
+        "737-900ER"
+      ],
+      "assigned_doors": [
+        "L1",
+        "L2"
+      ],
+      "assignment_rule": "select only when this is the nearest platform height and absolute live contact residual is <= 0.10 m",
+      "high_lod": {
+        "vertices": 5136,
+        "triangles": 2184,
+        "range_m": [
+          0,
+          220
+        ]
+      },
+      "low_lod": {
+        "vertices": 716,
+        "triangles": 292,
+        "range_m": [
+          220,
+          1500
+        ]
+      },
+      "bounds_xyz_m": [
+        [
+          -6.010000000000001,
+          0.0
+        ],
+        [
+          0.0,
+          4.085
+        ],
+        [
+          -0.6960000000000001,
+          0.6960000000000001
+        ]
+      ],
+      "sha256": "cc71d64d811d72e74ef5dd5c3df6c9aef1ce750d6facb7e2bcb988b435f47cea"
+    }
+  ]
+}
