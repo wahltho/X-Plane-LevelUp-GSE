@@ -2,10 +2,10 @@
 
 **Development preview. Simulator acceptance is still required before a stable release or MTK maintenance-group activation.**
 
-Preview 2 keeps the Preview 1 runtime and assets unchanged. It advances the
-package version and adds regression coverage for all three MTK-managed scopes
-and standalone upgrade/restore from Preview 1. Simulator validation is still
-outstanding.
+**Preview 1 and Preview 2 are affected by an XLua loader defect and should not be used.**
+Preview 3 fixes the module imports: XLua's `dofile()` discards return values,
+so helpers now publish explicit namespace exports. The regression test uses
+actual XLua `init.lua` rather than ordinary Lua loader semantics.
 
 A standalone, unofficial GSE positioning patch for the LevelUp 737-600, -700,
 -800, -900 and -900ER. Uses the user's locally installed Laminar equipment and
@@ -50,7 +50,9 @@ not modify ACF, flight model, W&B, or Zibomod binaries.
 
 `python3 tools/build_package.py` creates a ZIP and checksum under `dist`.
 `python3 -m unittest discover -s tests -v` exercises the installer and package.
-Set `LUAJIT` to a LuaJIT executable for the numeric/hash/runtime fixture suite.
+The consolidated runner requires explicit `--luajit` and `--xlua-init` paths,
+plus the local reference paths shown by `python3 tools/run_checks.py --help`.
+No third-party XLua source is bundled.
 `tools/import_profiles.py` is a developer-only numeric/hash extraction tool;
 supply the five explicit local reference paths shown by its --help output.
 No extracted mesh vertices or textures are stored in those runtime profiles.

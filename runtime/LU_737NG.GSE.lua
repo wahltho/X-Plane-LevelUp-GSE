@@ -1,8 +1,12 @@
 -- Option B only: local Laminar objects and original static fallback stairs.
-local G=dofile('geometry.lua')
-local P=dofile('profiles.lua')
-local hash=dofile('sha256.lua')
-local S=dofile('sdk.lua')
+dofile('geometry.lua')
+local G=assert(LU_GSE_geometry, 'Missing GSE geometry export')
+dofile('profiles.lua')
+local P=assert(LU_GSE_profiles, 'Missing GSE profiles export')
+dofile('sha256.lua')
+local hash=assert(LU_GSE_sha256, 'Missing GSE sha256 export')
+dofile('sdk.lua')
+local S=assert(LU_GSE_sdk, 'Missing GSE sdk export')
 local entries,refs,logged,verified={},{},{},{}
 local terrain,variant,cg,aircraft,lr
 local function read(path)local f=io.open(path,'rb');if not f then return nil end;local v=f:read('*a');f:close();return v end

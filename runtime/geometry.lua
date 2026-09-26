@@ -115,4 +115,6 @@ function M.equipment(target,heading,profile,probe,fixed_u)
  end
  return best,best and nil or 'MODEL_FIT'
 end
+-- XLua's dofile discards return values; publish in the module namespace.
+if real_table then real_table('LU_GSE_geometry',M) else LU_GSE_geometry=M end
 return M

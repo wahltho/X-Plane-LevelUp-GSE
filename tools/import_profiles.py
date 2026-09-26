@@ -74,7 +74,7 @@ def build():
  data={'variants':variants,'models':models,'stairs':stairs['models'],'stair_texture_hash':stairs['family']['common_texture']['sha256']}
  (ROOT/'packaging/profiles.json').write_text(json.dumps(data,indent=2)+'\n')
  # Conflict paths and local own model hashes are appended below.
- (ROOT/'runtime/profiles.lua').write_text('-- Generated numeric profiles; no third-party mesh or texture data.\nreturn '+lua(data)+'\n')
+ (ROOT/'runtime/profiles.lua').write_text('-- Generated numeric profiles; no third-party mesh or texture data.\nlocal P='+lua(data)+"\nif real_table then real_table('LU_GSE_profiles',P) else LU_GSE_profiles=P end\nreturn P\n")
  # Known native and old renamed objects are retirements, never package payloads.
  retired={}
  for base in [ZIBO,OLD]:
@@ -85,7 +85,7 @@ def build():
  for model in data['stairs']:model['sha256']=sha(ROOT/'assets/stairs'/model['obj8'])
  data['conflicts']=sorted(p for p in retired if p.endswith('.obj'))
  (ROOT/'packaging/profiles.json').write_text(json.dumps(data,indent=2)+'\n')
- (ROOT/'runtime/profiles.lua').write_text('-- Generated numeric profiles; no third-party mesh or texture data.\nreturn '+lua(data)+'\n')
+ (ROOT/'runtime/profiles.lua').write_text('-- Generated numeric profiles; no third-party mesh or texture data.\nlocal P='+lua(data)+"\nif real_table then real_table('LU_GSE_profiles',P) else LU_GSE_profiles=P end\nreturn P\n")
 if __name__=='__main__':
  import argparse
  parser=argparse.ArgumentParser(description=__doc__)

@@ -3,14 +3,14 @@ import argparse,hashlib,json,subprocess,sys
 from pathlib import Path
 from build_package import VERSION
 ROOT=Path(__file__).resolve().parents[1]
-p=argparse.ArgumentParser();p.add_argument('--luajit',required=True);p.add_argument('--lu-reference',required=True);p.add_argument('--xplane-root',required=True);p.add_argument('--mtk-root',required=True);p.add_argument('--native-gpu',required=True)
+p=argparse.ArgumentParser();p.add_argument('--luajit',required=True);p.add_argument('--xlua-init',required=True);p.add_argument('--lu-reference',required=True);p.add_argument('--xplane-root',required=True);p.add_argument('--mtk-root',required=True);p.add_argument('--native-gpu',required=True)
 a=p.parse_args();out=ROOT/'dist/validation';out.mkdir(parents=True,exist_ok=True)
 commands={
 'python':[sys.executable,'-m','unittest','discover','-s','tests','-v'],
 'lua-numeric':[a.luajit,'tests/runtime.lua',str(ROOT)],
-'lua-lifecycle':[a.luajit,'tests/lifecycle.lua',str(ROOT),a.lu_reference,a.xplane_root],
+'lua-lifecycle':[a.luajit,'tests/lifecycle.lua',str(ROOT),a.lu_reference,a.xplane_root,a.xlua_init],
 'stair-assets':[sys.executable,'asset_sources/stairs/validate_fallback_stairs.py','--objects','assets/stairs','--measurements','docs/levelup_stair_measurements.json','--output',str(out/'stairs')],
-'mtk':['dotnet','run','--project','tests/mtk/Smoke.csproj','-p:MtkRoot='+a.mtk_root,'--',str(ROOT/'dist/levelup-gse-'+VERSION),a.native_gpu],
+'mtk':['dotnet','run','--project','tests/mtk/Smoke.csproj','-p:MtkRoot='+a.mtk_root,'--',str(ROOT/'dist'/('levelup-gse-'+VERSION)),a.native_gpu],
 }
 results={}
 for name,cmd in commands.items():

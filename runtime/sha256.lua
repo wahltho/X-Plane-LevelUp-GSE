@@ -25,4 +25,5 @@ local function digest(s)
  local out={};for i,v in ipairs(H) do out[i]=bit.tohex(v,8) end
  return table.concat(out)
 end
+LU_GSE_sha256=digest
 return digest

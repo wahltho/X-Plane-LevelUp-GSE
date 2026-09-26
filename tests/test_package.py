@@ -26,10 +26,15 @@ class PackageTests(unittest.TestCase):
   self.assertIn('objects/LU_GSE_stairs/LU_fallback_stairs_285.obj',targets)
   self.assertIn('objects/LU_GSE_stairs/LU_fallback_stairs_305.obj',targets)
   self.assertNotIn('objects/GSE/Zibo_stairs_fwd.obj',targets)
+ def test_upgrade_allowlist_matches_reviewed_previous_payloads(self):
+  known=json.loads((ROOT/'packaging/previous_payloads.json').read_text())
+  m=json.loads((self.package/'package-manifest.json').read_text())
+  for target in m['modules'][0]['targets']:
+   self.assertEqual(target['sourceSha256'],known[target['relativePath']])
  def test_update_from_previous_preview_preserves_original_backups(self):
   manifest_path=self.pkg/'package-manifest.json'
   manifest=json.loads(manifest_path.read_text())
-  self.assertEqual(manifest['packageVersion'],'0.2.0-preview.2')
+  self.assertEqual(manifest['packageVersion'],builder.VERSION)
   manifest['packageVersion']='0.2.0-preview.1'
   manifest_path.write_text(json.dumps(manifest))
   native=self.root/'objects/GSE/synthetic.obj'
@@ -40,7 +45,7 @@ class PackageTests(unittest.TestCase):
   manifest_path.write_text(json.dumps(manifest))
   self.run_install('install')
   self.assertFalse(native.exists())
-  manifest['packageVersion']='0.2.0-preview.2'
+  manifest['packageVersion']=builder.VERSION
   manifest_path.write_text(json.dumps(manifest))
   self.run_install('install')
   self.assertFalse(native.exists())

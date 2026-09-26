@@ -30,5 +30,21 @@ try {
   restored=op.Restore(variant,package);
   if(!restored.Succeeded||!File.ReadAllBytes(native).SequenceEqual(original))throw new Exception("Native byte-identical restore failed");
  }
+ foreach(var previous in args.Skip(2)) {
+  result=await op.RunAsync(ContentPatchAction.Install,variant,Path.GetFullPath(previous),["gse"]);
+  if(!result.Succeeded)throw new Exception("Previous install: "+result.Message);
+  result=await op.RunAsync(ContentPatchAction.Update,variant,package,["gse"]);
+  if(!result.Succeeded)throw new Exception("Upgrade: "+result.Message);
+  foreach(var file in Directory.GetFiles(Path.Combine(package,"modules/gse"),"*",SearchOption.AllDirectories)) {
+   var relative=Path.GetRelativePath(Path.Combine(package,"modules/gse"),file);
+   if(!File.ReadAllBytes(file).SequenceEqual(File.ReadAllBytes(Path.Combine(aircraft,relative))))throw new Exception("Upgrade payload mismatch: "+relative);
+  }
+  result=await op.RunAsync(ContentPatchAction.Update,variant,package,["gse"]);
+  if(!result.Succeeded||result.Changed)throw new Exception("Upgrade repeat failed");
+  restored=op.Restore(variant,package);
+  if(!restored.Succeeded)throw new Exception("Upgrade restore: "+restored.Message);
+  if(args.Length>1&&!File.ReadAllBytes(Path.Combine(aircraft,"objects/GSE/gpu.obj")).SequenceEqual(File.ReadAllBytes(args[1])))throw new Exception("Upgrade lost native original");
+  Console.WriteLine("MTK previous ZIP upgrade/repeat/payload/restore PASS: "+previous);
+ }
  Console.WriteLine("MTK actual package: schema4 load/install/repeat/foreign-owner blocking/restore passed.");
 } finally {Directory.Delete(temp,true);}

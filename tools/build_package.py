@@ -2,7 +2,7 @@
 import hashlib,json,shutil,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='0.2.0-preview.2'
+VERSION='0.2.0-preview.3'
 PACKAGE='jt8d17.levelup-737ng.gse'
 SCRIPT='plugins/xlua/scripts/LU_737NG.GSE'
 SCOPES=['objects/GSE','objects/LU_GSE_stairs',SCRIPT]
@@ -11,6 +11,7 @@ def build():
  out=ROOT/'dist'/('levelup-gse-'+VERSION)
  if out.exists():shutil.rmtree(out)
  out.mkdir(parents=True)
+ previous=json.loads((ROOT/'packaging/previous_payloads.json').read_text())
  sources={SCRIPT+'/'+p.name:p.read_bytes() for p in sorted((ROOT/'runtime').glob('*.lua'))}
  for p in sorted((ROOT/'assets/stairs').iterdir()):
   if p.suffix in ('.obj','.png'):sources['objects/LU_GSE_stairs/'+p.name]=p.read_bytes()
@@ -24,7 +25,7 @@ def build():
  for target,content in sorted(sources.items()):
   p=out/'modules/gse'/target;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(content)
   module['payloads'].append(dict(path=target,size=len(content),sha256=sha(content)))
-  module['targets'].append(dict(operation='copy-file-v1',payload=target,relativePath=target,sourceSha256=[],resultSha256=sha(content)))
+  module['targets'].append(dict(operation='copy-file-v1',payload=target,relativePath=target,sourceSha256=previous.get(target,[]),resultSha256=sha(content)))
  manifest=dict(schemaVersion=4,packageType='compatibilityPackage',packageId=PACKAGE,packageVersion=VERSION,repositoryUrl='https://github.com/wahltho/X-Plane-LevelUp-GSE',aircraftFamily='LevelUp 737NG',supportedProducts=['levelup-737ng'],supportedUpstreamReleases=[],restartRequired=True,modules=[module])
  (out/'package-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
  (out/'profiles.json').write_text(json.dumps(profiles,indent=2)+'\n')

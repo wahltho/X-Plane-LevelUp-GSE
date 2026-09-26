@@ -1,7 +1,9 @@
--- Read-only local-source integration fixture; SDK is entirely mocked.
-local root,lu,xp=assert(arg[1]),assert(arg[2]),assert(arg[3])
+-- Actual XLua loader integration; native SDK calls are mocked.
+local root,lu,xp,init=assert(arg[1]),assert(arg[2]),assert(arg[3]),assert(arg[4], 'supply actual XLua init.lua')
+local runtime=arg[5] or root..'/runtime'
+local stairs=arg[6] or root..'/assets/stairs'
 local original_dofile,original_open=dofile,io.open
-local P=original_dofile(root..'/runtime/profiles.lua')
+local P=original_dofile(runtime..'/profiles.lua')
 local v=P.variants['737_80NG.acf']
 local state={local_x=0,local_y=2.65-v.doors.L1[2]+v.cg[2],local_z=0,theta=0,phi=0,psi=0,groundspeed=0,onground_any=1,front=0}
 local loads,closed,created,destroyed=0,0,0,0
@@ -23,15 +25,28 @@ function S.load(path,names)
  function e:close()self:hide();closed=closed+1 end
  return e
 end
-function dofile(name)
- if name=='sdk.lua' then return S end
- return original_dofile(root..'/runtime/'..name)
+-- Use the actual XLua namespace and dofile closure, not stock Lua dofile.
+original_dofile(init)
+function XLuaGetCode(name)
+ if name=='sdk.lua' then return function()
+  -- Execute the real adapter/export; only the native library is unavailable here.
+  local ffi=require('ffi');local native_load=ffi.load
+  ffi.load=function() return {} end
+  local ok,err=pcall(setfenv(assert(loadfile(runtime..'/sdk.lua')),getfenv(1)))
+  ffi.load=native_load;assert(ok,err)
+  assert(type(LU_GSE_sdk)=='table' and type(LU_GSE_sdk.paths)=='function')
+  real_table('LU_GSE_sdk',S)
+ end end
+ return assert(loadfile(runtime..'/'..name))
 end
 io.open=function(path,mode)
- if path:find('/objects/LU_GSE_stairs/',1,true) then path=root..'/assets/stairs/'..path:match('([^/]+)$') end
+ if path:find('/objects/LU_GSE_stairs/',1,true) then path=stairs..'/'..path:match('([^/]+)$') end
  return original_open(path,mode)
 end
-original_dofile(root..'/runtime/LU_737NG.GSE.lua')
+run_module_in_namespace(assert(loadfile(runtime..'/LU_737NG.GSE.lua')))
+assert(rawget(n.LU_GSE_profiles,'variants'),'profiles must remain a raw table')
+assert(n.dofile('geometry.lua')==nil,'XLua dofile must discard return values')
+local flight_start,after_physics,aircraft_unload=n.flight_start,n.after_physics,n.aircraft_unload
 flight_start();assert(loads>10,'models loaded')
 for i=1,20 do after_physics() end
 assert(created==1 and destroyed==0,'visible stair instance must persist across frames')
@@ -39,5 +54,7 @@ local y=state.local_y;state.local_y=y+2;after_physics();assert(destroyed==1,'bad
 state.local_y=y;after_physics();assert(created==1,'failure latched until service toggled')
 state.front=1;after_physics();state.front=0;after_physics();assert(created==2,'service reactivates')
 aircraft_unload();assert(closed==loads,'all objects released');assert(destroyed==created,'all instances destroyed')
+flight_start();after_physics();aircraft_unload()
+assert(closed==loads and destroyed==created,'repeated flight lifecycle releases all resources')
 io.open=original_open;dofile=original_dofile
 print('Mocked SDK lifecycle passed: load, persistent instance, fit-failure latch, service reset, unload')

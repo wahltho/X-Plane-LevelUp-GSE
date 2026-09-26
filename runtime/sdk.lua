@@ -58,4 +58,6 @@ function S.load(path,refs)
  function entry:close()self:hide();C.XPLMUnloadObject(self.object);self.object=nil end
  return entry
 end
+-- XLua's dofile discards return values; publish in the module namespace.
+if real_table then real_table('LU_GSE_sdk',S) else LU_GSE_sdk=S end
 return S

@@ -7,5 +7,6 @@
   "mtkSchema": 4,
   "requiresMtkSourceChange": false,
   "simulatorValidated": false,
-  "packageSha256": "469c5281ed46a2db00ba919644a2367327c373ce30a172285bff718c952cf99b"
+  "packageSha256": "1af7d3987ea2174fa24190cdb27593bdc81f85ca826f0bf29ede43efb56d6094",
+  "version": "0.2.0-preview.3"
 }
