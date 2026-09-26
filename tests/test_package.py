@@ -7,6 +7,45 @@ installer=load('installer',ROOT/'z_Install.py');builder=load('builder',ROOT/'too
 class PackageTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):cls.package=builder.build()
+ def test_option_b_package_has_complete_mtk_scope_contract(self):
+  m=json.loads((self.package/'package-manifest.json').read_text())
+  self.assertEqual(m['schemaVersion'],4)
+  self.assertEqual(m['packageId'],installer.PACKAGE_ID)
+  self.assertEqual(m['supportedProducts'],['levelup-737ng'])
+  module=m['modules'][0]
+  self.assertEqual([s['relativePath'] for s in module['managedScopes']],list(installer.SCOPES))
+  self.assertTrue(all(s['mode']=='flatExclusive' for s in module['managedScopes']))
+  targets={t['relativePath'] for t in module['targets']}
+  retired={r['relativePath'] for r in module['retiredFiles']}
+  self.assertFalse(targets & retired)
+  self.assertTrue(all(str(Path(p).parent).replace('\\','/') in installer.SCOPES for p in targets | retired))
+  self.assertEqual(len(targets),10)
+  self.assertEqual(len(retired),68)
+  self.assertIn(installer.SCRIPT_DIR+'/LU_737NG.GSE.lua',targets)
+  self.assertIn('objects/LU_GSE_stairs/LU_fallback_stairs_265.obj',targets)
+  self.assertIn('objects/LU_GSE_stairs/LU_fallback_stairs_285.obj',targets)
+  self.assertIn('objects/LU_GSE_stairs/LU_fallback_stairs_305.obj',targets)
+  self.assertNotIn('objects/GSE/Zibo_stairs_fwd.obj',targets)
+ def test_update_from_previous_preview_preserves_original_backups(self):
+  manifest_path=self.pkg/'package-manifest.json'
+  manifest=json.loads(manifest_path.read_text())
+  self.assertEqual(manifest['packageVersion'],'0.2.0-preview.2')
+  manifest['packageVersion']='0.2.0-preview.1'
+  manifest_path.write_text(json.dumps(manifest))
+  native=self.root/'objects/GSE/synthetic.obj'
+  original=b'known native fixture'
+  native.parent.mkdir(parents=True)
+  native.write_bytes(original)
+  manifest['modules'][0]['retiredFiles'].append({'relativePath':'objects/GSE/synthetic.obj','sourceSha256':[installer.sha(original)]})
+  manifest_path.write_text(json.dumps(manifest))
+  self.run_install('install')
+  self.assertFalse(native.exists())
+  manifest['packageVersion']='0.2.0-preview.2'
+  manifest_path.write_text(json.dumps(manifest))
+  self.run_install('install')
+  self.assertFalse(native.exists())
+  self.run_install('uninstall')
+  self.assertEqual(native.read_bytes(),original)
  def setUp(self):
   self.temp=tempfile.TemporaryDirectory();self.base=Path(self.temp.name);self.root=self.base/'aircraft';self.root.mkdir();self.pkg=self.base/'package';shutil.copytree(self.package,self.pkg)
   p=json.loads((self.pkg/'profiles.json').read_text());variant=next(iter(p['variants'].values()));variant['door_object']={'path':'objects/test.obj','sha256':installer.sha(b'fixture')}

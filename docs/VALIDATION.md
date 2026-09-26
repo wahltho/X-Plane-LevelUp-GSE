@@ -1,8 +1,8 @@
 # Build validation — 2026-09-26
 
-Status: SOURCE-READY PREVIEW, not simulator/release approval.
+Status: SOURCE-READY PREVIEW, not simulator or stable-release approval.
 
-- Python standalone/package: 16 tests passed (fresh/repeat/restore, native retirement,
+- Python standalone/package: 18 tests passed (fresh/repeat/restore, native retirement,
   changed/unknown files, ownership, corruption, symlinks, offline rejection,
   exception rollback, committed install/uninstall recovery and completion conflicts).
 - LuaJIT: known SHA-256 vectors, five variants, 25 stair-height cases, terrain

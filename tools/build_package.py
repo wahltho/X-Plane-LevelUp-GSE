@@ -2,7 +2,7 @@
 import hashlib,json,shutil,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='0.2.0-preview.1'
+VERSION='0.2.0-preview.2'
 PACKAGE='jt8d17.levelup-737ng.gse'
 SCRIPT='plugins/xlua/scripts/LU_737NG.GSE'
 SCOPES=['objects/GSE','objects/LU_GSE_stairs',SCRIPT]
@@ -30,7 +30,6 @@ def build():
  (out/'profiles.json').write_text(json.dumps(profiles,indent=2)+'\n')
  for name in ['z_Install.py','README.md','INSTALLATION.md','LICENSE']:
   if (ROOT/name).is_file():shutil.copy2(ROOT/name,out/name)
- archive=out.with_suffix('.zip') # Path suffix would drop preview.1: use exact name below
  archive=out.parent/(out.name+'.zip')
  with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
   for p in sorted(out.rglob('*')):

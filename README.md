@@ -2,6 +2,11 @@
 
 **Development preview. Simulator acceptance is still required before a stable release or MTK maintenance-group activation.**
 
+Preview 2 keeps the Preview 1 runtime and assets unchanged. It advances the
+package version and adds regression coverage for all three MTK-managed scopes
+and standalone upgrade/restore from Preview 1. Simulator validation is still
+outstanding.
+
 A standalone, unofficial GSE positioning patch for the LevelUp 737-600, -700,
 -800, -900 and -900ER. Uses the user's locally installed Laminar equipment and
 three original static stairs (2.65, 2.85 and 3.05 metres). No separate Zibo
