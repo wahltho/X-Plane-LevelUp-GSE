@@ -2,7 +2,7 @@
 import hashlib,json,shutil,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='0.2.0-preview.3'
+VERSION='0.2.0-preview.4'
 PACKAGE='jt8d17.levelup-737ng.gse'
 SCRIPT='plugins/xlua/scripts/LU_737NG.GSE'
 SCOPES=['objects/GSE','objects/LU_GSE_stairs',SCRIPT]

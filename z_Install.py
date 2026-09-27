@@ -119,9 +119,11 @@ def snapshot(root):return {s:scope(root,s) for s in SCOPES}
 def check_aircraft(root,package_root):
     profiles=json.loads(read(package_root,'profiles.json'))
     matched=0
-    for name,p in profiles['variants'].items():
+    for name,candidates in profiles['aircraft_profiles'].items():
         b=read(root,name)
         if b is None:continue
+        p=next((candidate for candidate in candidates if candidate['acf_sha256']==sha(b)),None)
+        if p is None:raise InstallError('Unsupported ACF file: '+name+'; no verified release profile')
         vals={};rawvals={}
         for line in b.decode(errors='replace').splitlines():
             t=line.split()

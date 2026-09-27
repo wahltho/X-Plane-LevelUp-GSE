@@ -1,5 +1,12 @@
 # Installation
 
+Preview 4 supports verified official S1.50 and S1.51C aircraft files. If Preview 3
+stopped with `Unsupported ACF object transform`, it did not install the patch:
+you do not need to reinstall LevelUp or MTK. Download Preview 4, extract the entire
+ZIP outside the aircraft folder, and run its installer. Do not manually copy the
+modules folder into the aircraft.
+
+
 Close X-Plane before installing or restoring. Use one installer owner at a time.
 Back up your aircraft before trying a preview. Extract the release ZIP outside
 the aircraft folder. Python 3.10+ is required for the standalone installer.

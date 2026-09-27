@@ -3,7 +3,8 @@
 **Development preview. Simulator acceptance is still required before a stable release or MTK maintenance-group activation.**
 
 **Preview 1 and Preview 2 are affected by an XLua loader defect and should not be used.**
-Preview 3 fixes the module imports: XLua's `dofile()` discards return values,
+Preview 4 adds explicit, hash-bound official S1.50 and S1.51C aircraft profiles.
+Unknown or modified ACF/door-object pairs remain unsupported. Preview 3 fixed the module imports: XLua's `dofile()` discards return values,
 so helpers now publish explicit namespace exports. The regression test uses
 actual XLua `init.lua` rather than ordinary Lua loader semantics.
 
@@ -32,10 +33,12 @@ the separate Git publication checkout is an export, not a second source tree.
 
 ## Limits
 
-The calibrated source inputs are the inspected official S1.50A geometry and local
-LR models. Other files are accepted only when their relevant geometry fingerprints
-match. A changed Laminar model needs a profile update. This is not a claim that
-all current or future X-Plane versions have identical assets.
+Verified aircraft profiles cover the official S1.50 base package and S1.51C
+update, plus the earlier S1.50A development reference. Each profile binds one
+exact ACF hash to its corresponding fuselage object, attachment properties,
+remeasured door thresholds and CG reference. Unknown or locally edited aircraft
+files are rejected; mixing objects from different releases is not supported.
+Local Laminar equipment is still hash-checked and a changed model needs review.
 
 Static fuel/deice equipment does not reproduce Zibo hose/spray/drive-up effects.
 All support-point/contact calculations and own stair family still need real

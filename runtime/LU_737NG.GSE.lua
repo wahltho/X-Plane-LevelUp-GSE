@@ -72,11 +72,15 @@ function aircraft_unload() close() end
 function flight_start()
  close();logged={};verified={};refs={}
  local root,name,folder=S.paths();aircraft=folder;lr=root..'Resources/default scenery/airport scenery/'
- variant=P.variants[name]
- if not variant then log('ACF_UNSUPPORTED',name);return end
- if not check(folder..variant.door_object.path,variant.door_object.sha256) then log('ACF_UNSUPPORTED','door geometry changed');return end
  local acf=read(folder..name)
  if not acf then log('ACF_MISSING',name);return end
+ variant=nil
+ local acf_hash=hash(acf)
+ for _,candidate in ipairs(P.aircraft_profiles[name] or {}) do
+  if candidate.acf_sha256==acf_hash then variant=candidate;break end
+ end
+ if not variant then log('ACF_UNSUPPORTED',name..'; unverified aircraft file');return end
+ if not check(folder..variant.door_object.path,variant.door_object.sha256) then log('ACF_UNSUPPORTED','door geometry changed');return end
  local reason;cg,reason=G.validate_acf(acf,variant)
  if not cg then log('ACF_UNSUPPORTED',tostring(reason));return end
  for _,path in ipairs(P.conflicts) do

@@ -56,7 +56,7 @@ class PackageTests(unittest.TestCase):
   p=json.loads((self.pkg/'profiles.json').read_text());variant=next(iter(p['variants'].values()));variant['door_object']={'path':'objects/test.obj','sha256':installer.sha(b'fixture')}
   p['variants']={'737_60NG.acf':variant};(self.pkg/'profiles.json').write_text(json.dumps(p))
   lines=[f'P {k} {v}' for k,v in (variant['signature']|variant['object_signature']).items()]
-  (self.root/'737_60NG.acf').write_text('\n'.join(lines));(self.root/'plugins/xlua/scripts').mkdir(parents=True);(self.root/'objects').mkdir();(self.root/'objects/test.obj').write_bytes(b'fixture')
+  variant['acf_sha256']=installer.sha('\n'.join(lines).encode());p['aircraft_profiles']={'737_60NG.acf':[variant]};(self.pkg/'profiles.json').write_text(json.dumps(p));(self.root/'737_60NG.acf').write_text('\n'.join(lines));(self.root/'plugins/xlua/scripts').mkdir(parents=True);(self.root/'objects').mkdir();(self.root/'objects/test.obj').write_bytes(b'fixture')
  def tearDown(self):self.temp.cleanup()
  def run_install(self,command):return installer.run(command,self.root,self.pkg)
  def test_fresh_repeat_verify_restore(self):

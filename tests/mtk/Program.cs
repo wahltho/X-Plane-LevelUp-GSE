@@ -6,7 +6,11 @@ var temp=Path.Combine(Path.GetTempPath(),"gse-mtk-"+Guid.NewGuid());
 Directory.CreateDirectory(temp);
 try {
  var aircraft=Path.Combine(temp,"aircraft");Directory.CreateDirectory(aircraft);
- var acf=Path.Combine(aircraft,"737_70NG.acf");File.WriteAllText(acf,"1200 Version\n");
+ var name=Environment.GetEnvironmentVariable("GSE_TEST_VARIANT")??"737_70NG";
+ var acf=Path.Combine(aircraft,name+".acf");
+ var reference=Environment.GetEnvironmentVariable("GSE_TEST_AIRCRAFT_REF");
+ if(reference is null)File.WriteAllText(acf,"1200 Version\n");
+ else File.Copy(Path.Combine(reference,name+".acf"),acf);
  var variant=new AircraftVariantViewAnalysis("levelup-737-700","LevelUp 737-700","LevelUp",acf,Path.ChangeExtension(acf,null)+"_prefs.txt","test","test","V2.S1.51","V2.S1.51",null,null,null,null,0,0,null,null,null,null,"test","test","test","test");
  var store=new ToolStateStore(Path.Combine(temp,"state"),Path.Combine(temp,"backups"));
  var op=new CompatibilityPackageOperation(store,()=>false);

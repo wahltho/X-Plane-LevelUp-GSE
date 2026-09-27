@@ -72,6 +72,7 @@ def build():
   models[role]={'ground':ground_points,'curve':curve,'path':rel,'sha256':sha(p),'dependencies':deps,'refs':sorted(refs),'bounds':bounds}
  stairs=json.loads((ROOT/'assets/stairs/model_profiles.json').read_text())
  data={'variants':variants,'models':models,'stairs':stairs['models'],'stair_texture_hash':stairs['family']['common_texture']['sha256']}
+ data['aircraft_profiles']=json.loads((ROOT/'packaging/aircraft_profiles.json').read_text())
  (ROOT/'packaging/profiles.json').write_text(json.dumps(data,indent=2)+'\n')
  # Conflict paths and local own model hashes are appended below.
  (ROOT/'runtime/profiles.lua').write_text('-- Generated numeric profiles; no third-party mesh or texture data.\nlocal P='+lua(data)+"\nif real_table then real_table('LU_GSE_profiles',P) else LU_GSE_profiles=P end\nreturn P\n")
@@ -84,6 +85,7 @@ def build():
  (ROOT/'packaging/retired.json').write_text(json.dumps({k:sorted(set(v)) for k,v in retired.items()},indent=2)+'\n')
  for model in data['stairs']:model['sha256']=sha(ROOT/'assets/stairs'/model['obj8'])
  data['conflicts']=sorted(p for p in retired if p.endswith('.obj'))
+ data['aircraft_profiles']=json.loads((ROOT/'packaging/aircraft_profiles.json').read_text())
  (ROOT/'packaging/profiles.json').write_text(json.dumps(data,indent=2)+'\n')
  (ROOT/'runtime/profiles.lua').write_text('-- Generated numeric profiles; no third-party mesh or texture data.\nlocal P='+lua(data)+"\nif real_table then real_table('LU_GSE_profiles',P) else LU_GSE_profiles=P end\nreturn P\n")
 if __name__=='__main__':

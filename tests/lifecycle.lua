@@ -4,12 +4,19 @@ local runtime=arg[5] or root..'/runtime'
 local stairs=arg[6] or root..'/assets/stairs'
 local original_dofile,original_open=dofile,io.open
 local P=original_dofile(runtime..'/profiles.lua')
-local v=P.variants['737_80NG.acf']
+local name=arg[7] or '737_80NG.acf'
+local f=assert(io.open(lu..'/'..name,'rb'));local acf=f:read('*a');f:close()
+local digest=original_dofile(runtime..'/sha256.lua')(acf)
+local v
+for _,candidate in ipairs(P.aircraft_profiles[name]) do if candidate.acf_sha256==digest then v=candidate;break end end
+local reject=arg[8]=='reject'
+assert(v or reject,'fixture must have an explicit verified profile')
+v=v or P.aircraft_profiles[name][1]
 local state={local_x=0,local_y=2.65-v.doors.L1[2]+v.cg[2],local_z=0,theta=0,phi=0,psi=0,groundspeed=0,onground_any=1,front=0}
 local loads,closed,created,destroyed=0,0,0,0
 local S={}
 function S.log(s)end
-function S.paths()return xp..'/','737_80NG.acf',lu..'/' end
+function S.paths()return xp..'/',name,lu..'/' end
 function S.ref(name)
  local key=name:match('([^/]+)$')
  if state[key]~=nil then return function()return state[key]end end
@@ -47,7 +54,12 @@ run_module_in_namespace(assert(loadfile(runtime..'/LU_737NG.GSE.lua')))
 assert(rawget(n.LU_GSE_profiles,'variants'),'profiles must remain a raw table')
 assert(n.dofile('geometry.lua')==nil,'XLua dofile must discard return values')
 local flight_start,after_physics,aircraft_unload=n.flight_start,n.after_physics,n.aircraft_unload
-flight_start();assert(loads>10,'models loaded')
+flight_start()
+if reject then
+ assert(loads==0,'unknown ACF/OBJ must not load any model');after_physics();aircraft_unload()
+ print('Unsupported aircraft correctly suppressed');return
+end
+assert(loads>10,'models loaded')
 for i=1,20 do after_physics() end
 assert(created==1 and destroyed==0,'visible stair instance must persist across frames')
 local y=state.local_y;state.local_y=y+2;after_physics();assert(destroyed==1,'bad fit hides')
