@@ -7,6 +7,7 @@ p=argparse.ArgumentParser();p.add_argument('--luajit',required=True);p.add_argum
 a=p.parse_args();out=ROOT/'dist/validation';out.mkdir(parents=True,exist_ok=True)
 commands={
 'python':[sys.executable,'-m','unittest','discover','-s','tests','-v'],
+'lua-sdk-paths':[a.luajit,'tests/sdk_paths.lua',str(ROOT/'runtime/sdk.lua')],
 'lua-numeric':[a.luajit,'tests/runtime.lua',str(ROOT)],
 'lua-lifecycle':[a.luajit,'tests/lifecycle.lua',str(ROOT),a.lu_reference,a.xplane_root,a.xlua_init],
 'stair-assets':[sys.executable,'asset_sources/stairs/validate_fallback_stairs.py','--objects','assets/stairs','--measurements','docs/levelup_stair_measurements.json','--output',str(out/'stairs')],

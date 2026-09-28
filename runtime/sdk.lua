@@ -40,8 +40,26 @@ function S.probe()
   return {tonumber(info[0].locationX),tonumber(info[0].locationY),tonumber(info[0].locationZ)}
  end,close=function()C.XPLMDestroyProbe(r)end}
 end
+-- File validation uses absolute paths, but XPLMLoadObject requires a path
+-- relative to the X-Plane root (on every platform). Do not change host features.
+local function object_path(path)
+ local buffer=ffi.new('char[4096]');C.XPLMGetSystemPath(buffer)
+ local root=ffi.string(buffer):gsub('\\','/'):gsub('/+$','')..'/'
+ local normalized=path:gsub('\\','/')
+ local prefix=normalized:sub(1,#root)
+ if ffi.os=='Windows' then prefix=prefix:lower();root=root:lower() end
+ if prefix~=root then return nil end
+ local relative=normalized:sub(#root+1)
+ if relative=='' or relative:find(':',1,true) or relative:find('%z') or relative:sub(1,1)=='/' then return nil end
+ for part in relative:gmatch('[^/]+') do
+  if part=='.' or part=='..' then return nil end
+ end
+ return relative
+end
 function S.load(path,refs)
- local object=C.XPLMLoadObject(path);if object==nil then return nil end
+ local relative=object_path(path)
+ if not relative then S.log('OBJECT_PATH_INVALID: '..path);return nil end
+ local object=C.XPLMLoadObject(relative);if object==nil then return nil end
  local names=ffi.new('const char*[?]',#refs+1);local pins={}
  for i,name in ipairs(refs) do pins[i]=ffi.new('char[?]',#name+1,name);names[i-1]=pins[i] end
  names[#refs]=nil

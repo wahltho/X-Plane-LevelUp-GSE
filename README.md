@@ -2,7 +2,10 @@
 
 **Development preview. Simulator acceptance is still required before a stable release or MTK maintenance-group activation.**
 
-**Preview 1 and Preview 2 are affected by an XLua loader defect and should not be used.**
+**Use Preview 5 or later. Earlier previews passed absolute paths to the SDK object loader, which requires paths relative to X-Plane. This caused equipment loading to fail in a reported Windows installation.**
+Preview 5 fixes that boundary for both local Laminar equipment and the included stairs. No additional libraries are required. Simulator validation remains pending.
+
+Preview 1 and Preview 2 also have an XLua loader defect.
 Preview 4 adds explicit, hash-bound official S1.50 and S1.51C aircraft profiles.
 Unknown or modified ACF/door-object pairs remain unsupported. Preview 3 fixed the module imports: XLua's `dofile()` discards return values,
 so helpers now publish explicit namespace exports. The regression test uses
