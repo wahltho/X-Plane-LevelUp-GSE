@@ -19,16 +19,16 @@ def extract(archive, target):
 with tempfile.TemporaryDirectory(prefix='gse-zip-') as tmp:
     base = Path(tmp).resolve(); latest = base/'latest'
     manifest = extract(a.zip, latest)
-    assert manifest['packageVersion'] == '0.2.0'
+    assert manifest['packageVersion'] == '0.2.1'
     packages = {}
-    for version in ('3', '4', '5'):
+    for version in ('0.2.0',):
         old = base/('old'+version)
-        extract(a.previous_dir/('levelup-gse-0.2.0-preview.'+version+'.zip'), old)
+        extract(a.previous_dir/('levelup-gse-'+version+'.zip'), old)
         packages[version] = old
     subprocess.run([str(a.luajit), str(ROOT/'tests/sdk_paths.lua'),
                     str(latest/'modules/gse/plugins/xlua/scripts/LU_737NG.GSE/sdk.lua')], check=True)
     profiles = json.loads((latest/'profiles.json').read_text())
-    for version in ('fresh', '3', '4', '5'):
+    for version in ('fresh', '0.2.0'):
         aircraft = base/('aircraft-'+version); aircraft.mkdir()
         (aircraft/'plugins/xlua/scripts').mkdir(parents=True)
         for name, profile in profiles['variants'].items():

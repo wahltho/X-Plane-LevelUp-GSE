@@ -1,10 +1,11 @@
 # LevelUp GSE — Option B
 
-**Version 0.2.0 — first regular release.** Install using the standalone Python
+**Version 0.2.1.** Install using the standalone Python
 installer or an MTK schema-4 compatibility package (MTK 0.19.0 or newer).
 
 A user has confirmed that equipment appears in the simulator after the Preview 5
-object-loading fix. Version 0.2.0 retains that fix and the existing geometry.
+object-loading fix. Version 0.2.1 retains that fix and the existing geometry, and moves GSE instance
+updates to the pre-flightloop phase to resolve the post-flightloop warning.
 Detailed positioning checks across all five variants, loads and terrain conditions
 remain open; see the limits below. No additional libraries are required.
 

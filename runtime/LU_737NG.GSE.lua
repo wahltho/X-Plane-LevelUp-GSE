@@ -130,7 +130,8 @@ local function hide(e)
  if e.driver then e.driver:hide() end
  for _,m in ipairs(e.models or {}) do m.object:hide() end
 end
-function after_physics()
+-- Instance creation/destruction belongs in the pre-flightloop phase.
+function before_physics()
  if not terrain then return end
  local pose={};for key,r in pairs(refs) do pose[key]=r() end
  for _,e in ipairs(entries) do

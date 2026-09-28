@@ -14,6 +14,11 @@ assert(v or reject,'fixture must have an explicit verified profile')
 v=v or P.aircraft_profiles[name][1]
 local state={local_x=0,local_y=2.65-v.doors.L1[2]+v.cg[2],local_z=0,theta=0,phi=0,psi=0,groundspeed=0,onground_any=1,front=0}
 local loads,closed,created,destroyed=0,0,0,0
+local phase='idle'
+local function lifecycle_phase()
+ assert(phase=='before_physics' or phase=='flight_start' or phase=='aircraft_unload',
+        'instance lifecycle in forbidden phase: '..phase)
+end
 local S={}
 function S.log(s)end
 function S.paths()return xp..'/',name,lu..'/' end
@@ -27,8 +32,8 @@ function S.probe()return {sample=function(x,y,z)return {x,0,z}end,close=function
 function S.load(path,names)
  loads=loads+1
  local e={active=false}
- function e:hide()if self.active then destroyed=destroyed+1;self.active=false end end
- function e:show(p,vals)if not self.active then created=created+1;self.active=true end;return true end
+ function e:hide()if self.active then lifecycle_phase();destroyed=destroyed+1;self.active=false end end
+ function e:show(p,vals)assert(phase=='before_physics','instance show outside before_physics: '..phase);if not self.active then lifecycle_phase();created=created+1;self.active=true end;return true end
  function e:close()self:hide();closed=closed+1 end
  return e
 end
@@ -53,20 +58,34 @@ end
 run_module_in_namespace(assert(loadfile(runtime..'/LU_737NG.GSE.lua')))
 assert(rawget(n.LU_GSE_profiles,'variants'),'profiles must remain a raw table')
 assert(n.dofile('geometry.lua')==nil,'XLua dofile must discard return values')
-local flight_start,after_physics,aircraft_unload=n.flight_start,n.after_physics,n.aircraft_unload
+local function call(name)
+ phase=name
+ if n[name] then n[name]() end
+ phase='idle'
+end
+local function flight_start()call('flight_start')end
+local function aircraft_unload()call('aircraft_unload')end
+local function frame()
+ call('before_physics');call('after_physics')
+end
 flight_start()
 if reject then
- assert(loads==0,'unknown ACF/OBJ must not load any model');after_physics();aircraft_unload()
+ assert(loads==0,'unknown ACF/OBJ must not load any model');frame();aircraft_unload()
  print('Unsupported aircraft correctly suppressed');return
 end
 assert(loads>10,'models loaded')
-for i=1,20 do after_physics() end
+for i=1,20 do frame() end
 assert(created==1 and destroyed==0,'visible stair instance must persist across frames')
-local y=state.local_y;state.local_y=y+2;after_physics();assert(destroyed==1,'bad fit hides')
-state.local_y=y;after_physics();assert(created==1,'failure latched until service toggled')
-state.front=1;after_physics();state.front=0;after_physics();assert(created==2,'service reactivates')
+local y=state.local_y;state.local_y=y+2;frame();assert(destroyed==1,'bad fit hides')
+state.local_y=y;frame();assert(created==1,'failure latched until service toggled')
+state.front=1;frame();state.front=0;frame();assert(created==2,'service reactivates')
+state.groundspeed=1;frame();assert(destroyed==created,'moving hides')
+state.groundspeed=0;frame();assert(created==destroyed+1,'stopped reactivates')
+state.onground_any=0;frame();assert(destroyed==created,'airborne hides')
+state.onground_any=1;frame();assert(created==destroyed+1,'ground reactivates')
+flight_start();assert(destroyed==created,'restart releases active instances');frame()
 aircraft_unload();assert(closed==loads,'all objects released');assert(destroyed==created,'all instances destroyed')
-flight_start();after_physics();aircraft_unload()
+flight_start();frame();aircraft_unload()
 assert(closed==loads and destroyed==created,'repeated flight lifecycle releases all resources')
 io.open=original_open;dofile=original_dofile
-print('Mocked SDK lifecycle passed: load, persistent instance, fit-failure latch, service reset, unload')
+print('Mocked SDK lifecycle passed: pre-physics phase, persistence, fit latch, service reset, movement/airborne, restart/unload')

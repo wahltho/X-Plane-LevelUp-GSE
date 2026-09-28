@@ -17,7 +17,8 @@
   "plugins/xlua/scripts/LU_737NG.GSE/LU_737NG.GSE.lua": [
     "39f5ad8446deee2c803e9fb9262fa0281089b480f13c682d8a61f2474753fd85",
     "953599efb2a0c033363a11caca4ac442dd631092e3562863f703f10f60d19af1",
-    "f93fbbcb9b8eedcbfe39e16090cf98b29653b3992d17feea57a3548cb9b0fad3"
+    "f93fbbcb9b8eedcbfe39e16090cf98b29653b3992d17feea57a3548cb9b0fad3",
+    "ccc7a12de7132cfaa7d21075aab5ef1a249a9f84ccabae14ed1b8212f28df43c"
   ],
   "plugins/xlua/scripts/LU_737NG.GSE/geometry.lua": [
     "256c2eec336195a106b49d27af2ab6e1cb7e1d429bf6dcf364350fb5b54dc262",
