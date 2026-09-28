@@ -1,15 +1,15 @@
 # LevelUp GSE — Option B
 
-**Development preview. Simulator acceptance is still required before a stable release or MTK maintenance-group activation.**
+**Version 0.2.0 — first regular release.** Install using the standalone Python
+installer or an MTK schema-4 compatibility package (MTK 0.19.0 or newer).
 
-**Use Preview 5 or later. Earlier previews passed absolute paths to the SDK object loader, which requires paths relative to X-Plane. This caused equipment loading to fail in a reported Windows installation.**
-Preview 5 fixes that boundary for both local Laminar equipment and the included stairs. No additional libraries are required. Simulator validation remains pending.
+A user has confirmed that equipment appears in the simulator after the Preview 5
+object-loading fix. Version 0.2.0 retains that fix and the existing geometry.
+Detailed positioning checks across all five variants, loads and terrain conditions
+remain open; see the limits below. No additional libraries are required.
 
-Preview 1 and Preview 2 also have an XLua loader defect.
-Preview 4 adds explicit, hash-bound official S1.50 and S1.51C aircraft profiles.
-Unknown or modified ACF/door-object pairs remain unsupported. Preview 3 fixed the module imports: XLua's `dofile()` discards return values,
-so helpers now publish explicit namespace exports. The regression test uses
-actual XLua `init.lua` rather than ordinary Lua loader semantics.
+Upgrade earlier previews using the same installer that currently owns the patch.
+Previews 1–4 contain known loading defects and should be replaced.
 
 A standalone, unofficial GSE positioning patch for the LevelUp 737-600, -700,
 -800, -900 and -900ER. Uses the user's locally installed Laminar equipment and
@@ -63,8 +63,8 @@ No third-party XLua source is bundled.
 supply the five explicit local reference paths shown by its --help output.
 No extracted mesh vertices or textures are stored in those runtime profiles.
 
-See INSTALLATION.md and docs/VALIDATION.md. The full independent review must be
-completed before promoting this preview. No automatic download/update checker.
+See INSTALLATION.md and docs/VALIDATION.md for installation and release evidence.
+No automatic download/update checker.
 
 ## Credits and provenance
 

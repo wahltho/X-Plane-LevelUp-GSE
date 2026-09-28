@@ -123,7 +123,7 @@ function flight_start()
    entries[#entries+1]={id=d[1],kind='stairs',vis=vis,point=variant.doors[d[1]],models=models}
   end
  end
- S.log('Option B initialized for '..variant.id..'; simulator fit validation required for this preview build.')
+ S.log('Option B initialized for '..variant.id..'; local Laminar equipment and static stairs.')
 end
 local function hide(e)
  if e.object then e.object:hide() end

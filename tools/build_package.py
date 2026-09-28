@@ -2,7 +2,7 @@
 import hashlib,json,shutil,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-VERSION='0.2.0-preview.5'
+VERSION='0.2.0'
 PACKAGE='jt8d17.levelup-737ng.gse'
 SCRIPT='plugins/xlua/scripts/LU_737NG.GSE'
 SCOPES=['objects/GSE','objects/LU_GSE_stairs',SCRIPT]
@@ -21,7 +21,7 @@ def build():
  retired=json.loads((ROOT/'packaging/retired.json').read_text())
  forbidden.update(h for hs in retired.values() for h in hs)
  if any(sha(v) in forbidden for v in sources.values()):raise ValueError('Third-party asset in package')
- module=dict(moduleId='gse',displayName='LevelUp GSE (Option B)',description='Local Laminar equipment and original static fallback stairs. Preview: simulator fit acceptance pending.',policy='optional',defaultEnabled=False,installationOrder=50,supportedUpstreamReleases=[],requires=[],conflictsWith=[],payloads=[],targets=[],retiredFiles=[dict(relativePath=k,sourceSha256=v) for k,v in sorted(retired.items())],managedScopes=[dict(relativePath=s,mode='flatExclusive') for s in SCOPES])
+ module=dict(moduleId='gse',displayName='LevelUp GSE (Option B)',description='Local Laminar ground equipment and original static stairs positioned for the five LevelUp 737NG variants.',policy='optional',defaultEnabled=False,installationOrder=50,supportedUpstreamReleases=[],requires=[],conflictsWith=[],payloads=[],targets=[],retiredFiles=[dict(relativePath=k,sourceSha256=v) for k,v in sorted(retired.items())],managedScopes=[dict(relativePath=s,mode='flatExclusive') for s in SCOPES])
  for target,content in sorted(sources.items()):
   p=out/'modules/gse'/target;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(content)
   module['payloads'].append(dict(path=target,size=len(content),sha256=sha(content)))

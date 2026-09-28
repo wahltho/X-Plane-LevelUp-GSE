@@ -1,3 +1,10 @@
+# Release validation
+
+The current regular release is v0.2.0. See [RELEASE_0.2.0_VALIDATION.md](RELEASE_0.2.0_VALIDATION.md)
+for its checks, user confirmation and remaining simulator coverage.
+
+The following is historical evidence from the initial development build.
+
 # Build validation — 2026-09-26
 
 Status: SOURCE-READY PREVIEW, not simulator or stable-release approval.

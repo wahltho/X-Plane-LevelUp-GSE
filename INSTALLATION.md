@@ -1,14 +1,11 @@
 # Installation
 
-Preview 4 supports verified official S1.50 and S1.51C aircraft files. If Preview 3
-stopped with `Unsupported ACF object transform`, it did not install the patch:
-you do not need to reinstall LevelUp or MTK. Download Preview 4, extract the entire
-ZIP outside the aircraft folder, and run its installer. Do not manually copy the
-modules folder into the aircraft.
-
+Version 0.2.0 supports verified official S1.50 and S1.51C aircraft files.
+Download the release ZIP; do not copy individual files or the modules folder into
+the aircraft. Earlier previews can be updated using the same installer owner.
 
 Close X-Plane before installing or restoring. Use one installer owner at a time.
-Back up your aircraft before trying a preview. Extract the release ZIP outside
+Back up your aircraft before installation. Extract the release ZIP outside
 the aircraft folder. Python 3.10+ is required for the standalone installer.
 
 ```
@@ -19,8 +16,8 @@ python3 z_Install.py uninstall --aircraft-root "/path/to/737NG Series"
 ```
 
 For MTK use the same package through its compatibility-package installation
-path. The package is optional until simulator acceptance is completed. Catalog
-maintenance-group activation is a separate release step, not performed by this ZIP.
+path. The package is optional. Availability in MTK depends on its catalog; publishing
+this ZIP does not automatically add or enable a maintenance-group entry.
 
 Known native files in objects/GSE are backed up then retired. Unknown files,
 modified installed files, links and unexpected managed-folder content block the
