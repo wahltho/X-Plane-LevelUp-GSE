@@ -1,0 +1,41 @@
+{
+  "repository": "https://github.com/petrolpram/737NG-Series",
+  "sources": [
+    {
+      "tag": "v2.S1.50C",
+      "commit": "5ab6c3ae3096428abc3503211e13f6b9076c7fa7",
+      "files": {
+        "objects/GSE/737misc.dds": "ed72b7f5b6a770b3dacc2191063460b9d722624213bc7160e4c4af6489b2aae0",
+        "objects/GSE/737misc2.dds": "f1e3ad12073a67c553664f910e339d19559f6e55c8b705d2390a3b020e86da91",
+        "objects/GSE/737misc2_LIT.dds": "a5b8d63cc9fa5dd8834c2ee138f3c792b686f47e5a944e27997e3ab58e34e2b7",
+        "objects/GSE/737misc2_NML.png": "ba8c27642ec4532a3f8ee54ba22c633ebac167ce110f09b40b54079026d3f629",
+        "objects/GSE/737misc_LIT.dds": "a5b8d63cc9fa5dd8834c2ee138f3c792b686f47e5a944e27997e3ab58e34e2b7",
+        "objects/GSE/737misc_NML.png": "2b9ec45b73f54a6335da7e0bd35860504194a1d38be0a3ab69f52ce7edf06394",
+        "objects/GSE/asu.obj": "2706573053cedccbb554cdd23285b46fc3b19e0087bc2ac288806009d3d21ab1",
+        "objects/GSE/cones.obj": "ede6282d89f3f35502ef366228490cd72a3b03847484a377b657234231c903ac",
+        "objects/GSE/de_ice_truck.obj": "72d01fbc2d85961271d94833554a5efc9d10db666bb8463bbd79041d2bdca4ba",
+        "objects/GSE/fueltruck.obj": "34efca978ae7fc05d50884bf0e854c1a8f27afb9282f6ac54ead0128605c47a4",
+        "objects/GSE/fueltruck2.obj": "a34180f31cb7b8da34b5d1244b6a94758a81771b53254a00cc50c8bd0c07a794",
+        "objects/GSE/gpu.obj": "11542322f95762f84855b45f056cca5d483d34015391c08a636b0d0bc1301a96"
+      }
+    },
+    {
+      "tag": "2.S1.51C",
+      "commit": "478d6ce164045aa5e7059de755ed5cab6a97b445",
+      "files": {
+        "objects/GSE/737misc.dds": "ed72b7f5b6a770b3dacc2191063460b9d722624213bc7160e4c4af6489b2aae0",
+        "objects/GSE/737misc2.dds": "f1e3ad12073a67c553664f910e339d19559f6e55c8b705d2390a3b020e86da91",
+        "objects/GSE/737misc2_LIT.dds": "3d493e2fa4ca1be07a42ac2dbc405f4354a2fe7c9841c4a5a04e0da24fba0a22",
+        "objects/GSE/737misc2_NML.png": "ba8c27642ec4532a3f8ee54ba22c633ebac167ce110f09b40b54079026d3f629",
+        "objects/GSE/737misc_LIT.dds": "a5b8d63cc9fa5dd8834c2ee138f3c792b686f47e5a944e27997e3ab58e34e2b7",
+        "objects/GSE/737misc_NML.png": "2b9ec45b73f54a6335da7e0bd35860504194a1d38be0a3ab69f52ce7edf06394",
+        "objects/GSE/asu.obj": "2706573053cedccbb554cdd23285b46fc3b19e0087bc2ac288806009d3d21ab1",
+        "objects/GSE/cones.obj": "ede6282d89f3f35502ef366228490cd72a3b03847484a377b657234231c903ac",
+        "objects/GSE/de_ice_truck.obj": "72d01fbc2d85961271d94833554a5efc9d10db666bb8463bbd79041d2bdca4ba",
+        "objects/GSE/fueltruck.obj": "34efca978ae7fc05d50884bf0e854c1a8f27afb9282f6ac54ead0128605c47a4",
+        "objects/GSE/fueltruck2.obj": "a34180f31cb7b8da34b5d1244b6a94758a81771b53254a00cc50c8bd0c07a794",
+        "objects/GSE/gpu.obj": "11542322f95762f84855b45f056cca5d483d34015391c08a636b0d0bc1301a96"
+      }
+    }
+  ]
+}

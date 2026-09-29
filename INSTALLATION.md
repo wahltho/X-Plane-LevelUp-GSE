@@ -1,6 +1,6 @@
 # Installation
 
-Version 0.2.1 supports verified official S1.50 and S1.51C aircraft files.
+Version 0.2.2 supports verified official S1.50 and S1.51C aircraft files.
 Download the release ZIP; do not copy individual files or the modules folder into
 the aircraft. Earlier previews can be updated using the same installer owner.
 

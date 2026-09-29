@@ -50,5 +50,27 @@ try {
   if(args.Length>1&&!File.ReadAllBytes(Path.Combine(aircraft,"objects/GSE/gpu.obj")).SequenceEqual(File.ReadAllBytes(args[1])))throw new Exception("Upgrade lost native original");
   Console.WriteLine("MTK previous ZIP upgrade/repeat/payload/restore PASS: "+previous);
  }
+ var originals=Environment.GetEnvironmentVariable("GSE_TEST_ORIGINAL_GSE");
+ if(originals is not null) {
+  var scope=Path.Combine(aircraft,"objects/GSE");
+  if(Directory.Exists(scope))Directory.Delete(scope,true);
+  Directory.CreateDirectory(scope);
+  var originalsByName=Directory.GetFiles(originals).ToDictionary(p=>Path.GetFileName(p)!,p=>File.ReadAllBytes(p));
+  foreach(var entry in originalsByName)File.WriteAllBytes(Path.Combine(scope,entry.Key!),entry.Value);
+  result=await op.RunAsync(ContentPatchAction.Install,variant,package,["gse"]);
+  if(!result.Succeeded)throw new Exception("Complete original scope: "+result.Message);
+  result=await op.RunAsync(ContentPatchAction.Update,variant,package,["gse"]);
+  if(!result.Succeeded||result.Changed)throw new Exception("Complete scope repeat failed");
+  restored=op.Restore(variant,package);
+  if(!restored.Succeeded)throw new Exception("Complete scope restore: "+restored.Message);
+  if(Directory.GetFiles(scope).Length!=originalsByName.Count)throw new Exception("Original scope count changed");
+  foreach(var entry in originalsByName)
+   if(!File.ReadAllBytes(Path.Combine(scope,entry.Key!)).SequenceEqual(entry.Value))throw new Exception("Original scope bytes changed: "+entry.Key);
+  var changed=Path.Combine(scope,"gpu.obj");File.AppendAllText(changed,"modified");
+  var bad=File.ReadAllBytes(changed);
+  result=await op.RunAsync(ContentPatchAction.Install,variant,package,["gse"]);
+  if(result.Succeeded||!File.ReadAllBytes(changed).SequenceEqual(bad))throw new Exception("Modified original accepted or changed");
+  Console.WriteLine("MTK complete original GSE scope install/repeat/restore and changed-original rejection PASS: "+originals);
+ }
  Console.WriteLine("MTK actual package: schema4 load/install/repeat/foreign-owner blocking/restore passed.");
 } finally {Directory.Delete(temp,true);}

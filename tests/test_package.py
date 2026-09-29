@@ -26,6 +26,14 @@ class PackageTests(unittest.TestCase):
   self.assertIn('objects/LU_GSE_stairs/LU_fallback_stairs_285.obj',targets)
   self.assertIn('objects/LU_GSE_stairs/LU_fallback_stairs_305.obj',targets)
   self.assertNotIn('objects/GSE/Zibo_stairs_fwd.obj',targets)
+ def test_official_lu_originals_are_accepted(self):
+  official=json.loads((ROOT/'packaging/official_lu_gse.json').read_text())
+  m=json.loads((self.package/'package-manifest.json').read_text())
+  allowed={r['relativePath']:r['sourceSha256'] for r in m['modules'][0]['retiredFiles']}
+  for source in official['sources']:
+   self.assertEqual(len(source['files']),12)
+   for path,digest in source['files'].items():
+    self.assertIn(digest,allowed[path],source['tag']+': '+path)
  def test_upgrade_allowlist_matches_reviewed_previous_payloads(self):
   known=json.loads((ROOT/'packaging/previous_payloads.json').read_text())
   m=json.loads((self.package/'package-manifest.json').read_text())

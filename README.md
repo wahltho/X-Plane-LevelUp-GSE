@@ -1,6 +1,8 @@
 # LevelUp GSE — Option B
 
-**Version 0.2.1.** Install using the standalone Python
+**Version 0.2.2.** This compatibility update accepts verified original LU GSE files when separately present in the aircraft folder. Normal LU release downloads contain no native GSE files and are unaffected by the earlier hash rejection. Unknown or modified files still block installation.
+
+Install using the standalone Python
 installer or an MTK schema-4 compatibility package (MTK 0.19.0 or newer).
 
 A user has confirmed that equipment appears in the simulator after the Preview 5

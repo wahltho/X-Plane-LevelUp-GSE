@@ -82,6 +82,12 @@ def build():
   for p in sorted(base.iterdir()):
    if p.is_file() and p.suffix.lower() in ('.obj','.png','.dds'):
     retired.setdefault('objects/GSE/'+p.name,[]).append(sha(p))
+ # Retain independently verified official LU originals on every regeneration.
+ official=json.loads((ROOT/'packaging/official_lu_gse.json').read_text())
+ for source in official['sources']:
+  for path,digest in source['files'].items():
+   if str(Path(path).parent)!='objects/GSE':raise ValueError('Invalid official GSE path: '+path)
+   retired.setdefault(path,[]).append(digest)
  (ROOT/'packaging/retired.json').write_text(json.dumps({k:sorted(set(v)) for k,v in retired.items()},indent=2)+'\n')
  for model in data['stairs']:model['sha256']=sha(ROOT/'assets/stairs'/model['obj8'])
  data['conflicts']=sorted(p for p in retired if p.endswith('.obj'))

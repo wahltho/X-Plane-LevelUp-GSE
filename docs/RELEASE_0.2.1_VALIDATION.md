@@ -26,3 +26,9 @@ not claim to resolve that report or the cargo 98-percent report.
 
 Local logs: dist/validation/release-0.2.1-zip.log, release-0.2.1-mtk.log and
 results.json. No live installation or MTK catalog changes performed.
+
+## Correction, 2026-09-29
+The original fixture did not contain the complete official LU GSE set.
+The published package rejects nine S1.51C original hashes. See
+`ORIGINAL_GSE_HASH_FIX_2026-09-29.md`; the prior passing results are not
+complete-aircraft installation evidence.

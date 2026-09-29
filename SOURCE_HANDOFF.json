@@ -2,11 +2,11 @@
   "canonicalLocalSource": "/Users/wahltho/Documents/Projects/Zibo Mod/Documentation/levelup_gse_patch",
   "publicationRepository": "https://github.com/wahltho/X-Plane-LevelUp-GSE",
   "publicationCheckout": "/Users/wahltho/Documents/Projects/X-Plane-LevelUp-GSE-Patch",
-  "status": "source-ready-preview",
+  "status": "release-candidate-validated",
   "option": "B",
   "mtkSchema": 4,
   "requiresMtkSourceChange": false,
   "simulatorValidated": false,
-  "packageSha256": "9d15adfcad105ec1c059f02b8a5a96d6e0376508dda758afbb4c192ce2fda9a6",
-  "version": "0.2.0-preview.4"
+  "packageSha256": "574c342614ba799e2e7a8001c08e43f9b6baa9b2137b6f959251cfc02e48f715",
+  "version": "0.2.2"
 }

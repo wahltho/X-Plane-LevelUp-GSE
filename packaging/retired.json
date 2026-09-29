@@ -1,4 +1,25 @@
 {
+  "objects/GSE/737misc.dds": [
+    "ed72b7f5b6a770b3dacc2191063460b9d722624213bc7160e4c4af6489b2aae0"
+  ],
+  "objects/GSE/737misc2.dds": [
+    "cc587a6cffdb44ff5139bb6a5d3a40c92239aa7a6684be9d4b945177ae6d44e5",
+    "f1e3ad12073a67c553664f910e339d19559f6e55c8b705d2390a3b020e86da91"
+  ],
+  "objects/GSE/737misc2_LIT.dds": [
+    "3d493e2fa4ca1be07a42ac2dbc405f4354a2fe7c9841c4a5a04e0da24fba0a22",
+    "a5b8d63cc9fa5dd8834c2ee138f3c792b686f47e5a944e27997e3ab58e34e2b7"
+  ],
+  "objects/GSE/737misc2_NML.png": [
+    "896166fb0b2cfd4c56b8c01eacdb6a12accf8ab1abe671f9ca91d282cd797511",
+    "ba8c27642ec4532a3f8ee54ba22c633ebac167ce110f09b40b54079026d3f629"
+  ],
+  "objects/GSE/737misc_LIT.dds": [
+    "a5b8d63cc9fa5dd8834c2ee138f3c792b686f47e5a944e27997e3ab58e34e2b7"
+  ],
+  "objects/GSE/737misc_NML.png": [
+    "2b9ec45b73f54a6335da7e0bd35860504194a1d38be0a3ab69f52ce7edf06394"
+  ],
   "objects/GSE/ASU.dds": [
     "f606d72170e2e625da1ba7cd1d755e5d249f067b96a840dd76a8088cb0c6898e"
   ],
@@ -10,6 +31,15 @@
   ],
   "objects/GSE/Ecobus_NML.png": [
     "93f987dc07ba84f6c4d9116d36d5877cc13effde3ce438c4dadf27acfea9dc3e"
+  ],
+  "objects/GSE/LU_asu.obj": [
+    "2706573053cedccbb554cdd23285b46fc3b19e0087bc2ac288806009d3d21ab1"
+  ],
+  "objects/GSE/LU_cones.obj": [
+    "ede6282d89f3f35502ef366228490cd72a3b03847484a377b657234231c903ac"
+  ],
+  "objects/GSE/LU_gpu.obj": [
+    "11542322f95762f84855b45f056cca5d483d34015391c08a636b0d0bc1301a96"
   ],
   "objects/GSE/Ramp_Vehicles.dds": [
     "cec3628d5397d3c1aae0b5aab49a575e800626125ee4727038aef9020d5520b0"
@@ -25,137 +55,6 @@
   ],
   "objects/GSE/TUG_660__driver.obj": [
     "1ea94541a9bd6eecf9a0b1dd3bff85c92d184688d6056da7d4c6582ac3f861c5"
-  ],
-  "objects/GSE/aft_stairs.obj": [
-    "7829f83c7ebfbfb790cb4ebf8bef07812e8fc2d19bd671a59ba7b4374538ac48"
-  ],
-  "objects/GSE/airstairs.obj": [
-    "a43a524c30ea502e8f86010e43a753f1cf9f1e3d356b1c67b2c39ba6094f5446"
-  ],
-  "objects/GSE/airstairs.png": [
-    "13a47170916d197a22876876ae9b3c9aab197869e35e7fd65368059e1d63f722"
-  ],
-  "objects/GSE/airstairs_NML.png": [
-    "ab2afa8c2995a80c47cf52e0e8562f47fbfcb683ce09ee053dc3b99e0f8b599c"
-  ],
-  "objects/GSE/arrow_3d.obj": [
-    "14bc236bed6aafd76efea11067210718da0ae5a74d05b5a671f5f58516750276",
-    "849df9aff4ae6058ef21e7e2909813a4151123ef04d4897e41ff4b5e50c5ac04"
-  ],
-  "objects/GSE/arrow_3d_2.obj": [
-    "6baae705db9178f102ed500b6bf279fe1f0ff649ccd99b775b332552da2f5b53",
-    "dd69c0ce6959e7a8c179ddcdc3ecd0636ecc8022843aa797566c3a7b030b2195"
-  ],
-  "objects/GSE/asu.obj": [
-    "ae793cbdd0d15be629b8c03a6317faedb67f5e2f528273c7fe60a91b435328f1"
-  ],
-  "objects/GSE/catering2_truck.obj": [
-    "54dc81c21b87adf2dee280d3ad4079578948f62ffa8662fa4d7ce0faecd0c84a"
-  ],
-  "objects/GSE/catering_truck.dds": [
-    "5bdbad8e180999745cb6eda1033d0efcd22b5fe83ef06d19aa6518d0745b70cf"
-  ],
-  "objects/GSE/catering_truck.obj": [
-    "a682d492f276a2bd5052c6af744b01250afe83ff81beb07c32ac17c62a8d653f"
-  ],
-  "objects/GSE/catering_truck_NML.png": [
-    "b3977e7f289e04625be4a7842e801a8d5d4b18bf2baaad75e3744274059db55f"
-  ],
-  "objects/GSE/catering_truck__driver.dds": [
-    "3f9a6c2001258a233ed0a668c0f5b5f50fd3e123e3d6871241c4f5b52c1d0bec"
-  ],
-  "objects/GSE/catering_truck__driver.obj": [
-    "a836ad91b3d81d0b295ee2e71696c2c976f63e459f1f7eacd99d468f9ead8390"
-  ],
-  "objects/GSE/cones.dds": [
-    "a5a099e62002b545aaddec233533def2c2e3775b3824ca7ef18fba4b97cc0bf1"
-  ],
-  "objects/GSE/cones.obj": [
-    "40cd56e926c32b93c988003df011f15872594ec5a77ca1768bb594bb7e6c4e44"
-  ],
-  "objects/GSE/cones_LIT.dds": [
-    "3edcdd01f6c25cdf5d87389fbd8e5e9fcc9298a875d85cc7902ac16365dd0c2c"
-  ],
-  "objects/GSE/de_ice_truck.obj": [
-    "8f6ba0ab7bbe8fa0cee4079e59bd6508c8c23f05667ff9505c96e7377d47aec8"
-  ],
-  "objects/GSE/deicetruck.dds": [
-    "1994dc32c0756ef1c625978f47be6dcd5452851599908dbcc13b16f23ef4f04e"
-  ],
-  "objects/GSE/deicetruck_NML.png": [
-    "efe8a6e53724766971f687f235ca03a671e238f0ae145077ebc2f6e36bc8d5fb"
-  ],
-  "objects/GSE/front_stairs.obj": [
-    "40939ca4790fb06b7c8a08372f2aa0b8e05c2265e7517d624fb828092686b660"
-  ],
-  "objects/GSE/fueltruck.dds": [
-    "edb7fa9fee561db367d27be08fe87463505a5b076b8f5d6ceaa2683cf8658063"
-  ],
-  "objects/GSE/fueltruck.obj": [
-    "2724d9b4502d0b773ca0465120de9271c0131349de0cb2da42f88144432449fc"
-  ],
-  "objects/GSE/fueltruck2.obj": [
-    "def6cb217a5db462054c9ab3f0c91d11b0370bb9043b6e61fbf7d104f5b96203"
-  ],
-  "objects/GSE/fueltruck_LIT.dds": [
-    "08f9e4f658611bcefc46c5003c4ca4cb6f4dc09b344477fd9a5f76509b02e245"
-  ],
-  "objects/GSE/fueltruck_nml.png": [
-    "42f260dfd3df671a4c8859f25beac33693d9a07ebe61a065a9d624af3063728f"
-  ],
-  "objects/GSE/gpu.dds": [
-    "5af6a1e754a82823966ef5c580c5c16ccf1cd866f2d61fa608f08929bd30f24e"
-  ],
-  "objects/GSE/gpu.obj": [
-    "891564d116f8061c262ae261aa37084e5c1d1c62ceac95defd363ad76986af05"
-  ],
-  "objects/GSE/gpu_NML.png": [
-    "543ad73da65565b8ebe19a7e30f3b43e2311d33659344df31f3d1be86bce95ab"
-  ],
-  "objects/GSE/pax_bus_1.obj": [
-    "f8130115908f757c5c4e302d4a6876b8d2acc8c796ec50ee5829cbc13fcc90e8"
-  ],
-  "objects/GSE/pax_bus_2.obj": [
-    "c1e0f0626c9f50bd765766075864150363e123cf48078811bb66de1ecc61cb7a"
-  ],
-  "objects/GSE/proterra.dds": [
-    "3e22b0935a8298bd237958ff99a618815a7d5475ef4354439ff41feb5fd32ee1"
-  ],
-  "objects/GSE/proterra_NML.png": [
-    "d9112366224af500a58fc9003fe60a65bc920a46cf53176edf6add3b2603225a"
-  ],
-  "objects/GSE/stairs.png": [
-    "b597e499e8cd99e5d9e4bd8cc37a51138ab23655803202e8cb6f7c21a3f0e78e"
-  ],
-  "objects/GSE/stairs_nml.png": [
-    "d16afbb609410cfdf4a6d3d57a15d6dcdecc921d7dc53c569272d52e72ba3dd2"
-  ],
-  "objects/GSE/737misc.dds": [
-    "ed72b7f5b6a770b3dacc2191063460b9d722624213bc7160e4c4af6489b2aae0"
-  ],
-  "objects/GSE/737misc2.dds": [
-    "cc587a6cffdb44ff5139bb6a5d3a40c92239aa7a6684be9d4b945177ae6d44e5"
-  ],
-  "objects/GSE/737misc2_LIT.dds": [
-    "a5b8d63cc9fa5dd8834c2ee138f3c792b686f47e5a944e27997e3ab58e34e2b7"
-  ],
-  "objects/GSE/737misc2_NML.png": [
-    "896166fb0b2cfd4c56b8c01eacdb6a12accf8ab1abe671f9ca91d282cd797511"
-  ],
-  "objects/GSE/737misc_LIT.dds": [
-    "a5b8d63cc9fa5dd8834c2ee138f3c792b686f47e5a944e27997e3ab58e34e2b7"
-  ],
-  "objects/GSE/737misc_NML.png": [
-    "2b9ec45b73f54a6335da7e0bd35860504194a1d38be0a3ab69f52ce7edf06394"
-  ],
-  "objects/GSE/LU_asu.obj": [
-    "2706573053cedccbb554cdd23285b46fc3b19e0087bc2ac288806009d3d21ab1"
-  ],
-  "objects/GSE/LU_cones.obj": [
-    "ede6282d89f3f35502ef366228490cd72a3b03847484a377b657234231c903ac"
-  ],
-  "objects/GSE/LU_gpu.obj": [
-    "11542322f95762f84855b45f056cca5d483d34015391c08a636b0d0bc1301a96"
   ],
   "objects/GSE/XP12_Ramp_Vehicles.dds": [
     "cec3628d5397d3c1aae0b5aab49a575e800626125ee4727038aef9020d5520b0"
@@ -204,5 +103,115 @@
   ],
   "objects/GSE/Zibo_stairs_fwd.obj": [
     "c5694bfc1614d2a8001fe8c5d480b38d217a99e01a9738ff5a0cd14f5c3bf7ef"
+  ],
+  "objects/GSE/aft_stairs.obj": [
+    "7829f83c7ebfbfb790cb4ebf8bef07812e8fc2d19bd671a59ba7b4374538ac48"
+  ],
+  "objects/GSE/airstairs.obj": [
+    "a43a524c30ea502e8f86010e43a753f1cf9f1e3d356b1c67b2c39ba6094f5446"
+  ],
+  "objects/GSE/airstairs.png": [
+    "13a47170916d197a22876876ae9b3c9aab197869e35e7fd65368059e1d63f722"
+  ],
+  "objects/GSE/airstairs_NML.png": [
+    "ab2afa8c2995a80c47cf52e0e8562f47fbfcb683ce09ee053dc3b99e0f8b599c"
+  ],
+  "objects/GSE/arrow_3d.obj": [
+    "14bc236bed6aafd76efea11067210718da0ae5a74d05b5a671f5f58516750276",
+    "849df9aff4ae6058ef21e7e2909813a4151123ef04d4897e41ff4b5e50c5ac04"
+  ],
+  "objects/GSE/arrow_3d_2.obj": [
+    "6baae705db9178f102ed500b6bf279fe1f0ff649ccd99b775b332552da2f5b53",
+    "dd69c0ce6959e7a8c179ddcdc3ecd0636ecc8022843aa797566c3a7b030b2195"
+  ],
+  "objects/GSE/asu.obj": [
+    "2706573053cedccbb554cdd23285b46fc3b19e0087bc2ac288806009d3d21ab1",
+    "ae793cbdd0d15be629b8c03a6317faedb67f5e2f528273c7fe60a91b435328f1"
+  ],
+  "objects/GSE/catering2_truck.obj": [
+    "54dc81c21b87adf2dee280d3ad4079578948f62ffa8662fa4d7ce0faecd0c84a"
+  ],
+  "objects/GSE/catering_truck.dds": [
+    "5bdbad8e180999745cb6eda1033d0efcd22b5fe83ef06d19aa6518d0745b70cf"
+  ],
+  "objects/GSE/catering_truck.obj": [
+    "a682d492f276a2bd5052c6af744b01250afe83ff81beb07c32ac17c62a8d653f"
+  ],
+  "objects/GSE/catering_truck_NML.png": [
+    "b3977e7f289e04625be4a7842e801a8d5d4b18bf2baaad75e3744274059db55f"
+  ],
+  "objects/GSE/catering_truck__driver.dds": [
+    "3f9a6c2001258a233ed0a668c0f5b5f50fd3e123e3d6871241c4f5b52c1d0bec"
+  ],
+  "objects/GSE/catering_truck__driver.obj": [
+    "a836ad91b3d81d0b295ee2e71696c2c976f63e459f1f7eacd99d468f9ead8390"
+  ],
+  "objects/GSE/cones.dds": [
+    "a5a099e62002b545aaddec233533def2c2e3775b3824ca7ef18fba4b97cc0bf1"
+  ],
+  "objects/GSE/cones.obj": [
+    "40cd56e926c32b93c988003df011f15872594ec5a77ca1768bb594bb7e6c4e44",
+    "ede6282d89f3f35502ef366228490cd72a3b03847484a377b657234231c903ac"
+  ],
+  "objects/GSE/cones_LIT.dds": [
+    "3edcdd01f6c25cdf5d87389fbd8e5e9fcc9298a875d85cc7902ac16365dd0c2c"
+  ],
+  "objects/GSE/de_ice_truck.obj": [
+    "72d01fbc2d85961271d94833554a5efc9d10db666bb8463bbd79041d2bdca4ba",
+    "8f6ba0ab7bbe8fa0cee4079e59bd6508c8c23f05667ff9505c96e7377d47aec8"
+  ],
+  "objects/GSE/deicetruck.dds": [
+    "1994dc32c0756ef1c625978f47be6dcd5452851599908dbcc13b16f23ef4f04e"
+  ],
+  "objects/GSE/deicetruck_NML.png": [
+    "efe8a6e53724766971f687f235ca03a671e238f0ae145077ebc2f6e36bc8d5fb"
+  ],
+  "objects/GSE/front_stairs.obj": [
+    "40939ca4790fb06b7c8a08372f2aa0b8e05c2265e7517d624fb828092686b660"
+  ],
+  "objects/GSE/fueltruck.dds": [
+    "edb7fa9fee561db367d27be08fe87463505a5b076b8f5d6ceaa2683cf8658063"
+  ],
+  "objects/GSE/fueltruck.obj": [
+    "2724d9b4502d0b773ca0465120de9271c0131349de0cb2da42f88144432449fc",
+    "34efca978ae7fc05d50884bf0e854c1a8f27afb9282f6ac54ead0128605c47a4"
+  ],
+  "objects/GSE/fueltruck2.obj": [
+    "a34180f31cb7b8da34b5d1244b6a94758a81771b53254a00cc50c8bd0c07a794",
+    "def6cb217a5db462054c9ab3f0c91d11b0370bb9043b6e61fbf7d104f5b96203"
+  ],
+  "objects/GSE/fueltruck_LIT.dds": [
+    "08f9e4f658611bcefc46c5003c4ca4cb6f4dc09b344477fd9a5f76509b02e245"
+  ],
+  "objects/GSE/fueltruck_nml.png": [
+    "42f260dfd3df671a4c8859f25beac33693d9a07ebe61a065a9d624af3063728f"
+  ],
+  "objects/GSE/gpu.dds": [
+    "5af6a1e754a82823966ef5c580c5c16ccf1cd866f2d61fa608f08929bd30f24e"
+  ],
+  "objects/GSE/gpu.obj": [
+    "11542322f95762f84855b45f056cca5d483d34015391c08a636b0d0bc1301a96",
+    "891564d116f8061c262ae261aa37084e5c1d1c62ceac95defd363ad76986af05"
+  ],
+  "objects/GSE/gpu_NML.png": [
+    "543ad73da65565b8ebe19a7e30f3b43e2311d33659344df31f3d1be86bce95ab"
+  ],
+  "objects/GSE/pax_bus_1.obj": [
+    "f8130115908f757c5c4e302d4a6876b8d2acc8c796ec50ee5829cbc13fcc90e8"
+  ],
+  "objects/GSE/pax_bus_2.obj": [
+    "c1e0f0626c9f50bd765766075864150363e123cf48078811bb66de1ecc61cb7a"
+  ],
+  "objects/GSE/proterra.dds": [
+    "3e22b0935a8298bd237958ff99a618815a7d5475ef4354439ff41feb5fd32ee1"
+  ],
+  "objects/GSE/proterra_NML.png": [
+    "d9112366224af500a58fc9003fe60a65bc920a46cf53176edf6add3b2603225a"
+  ],
+  "objects/GSE/stairs.png": [
+    "b597e499e8cd99e5d9e4bd8cc37a51138ab23655803202e8cb6f7c21a3f0e78e"
+  ],
+  "objects/GSE/stairs_nml.png": [
+    "d16afbb609410cfdf4a6d3d57a15d6dcdecc921d7dc53c569272d52e72ba3dd2"
   ]
 }
