@@ -43,3 +43,12 @@ or resolution through the owning toolkit. Runtime reports conflicts and refuses
 its own GSE rather than allowing duplicate objects. Log.txt messages use [LU GSE].
 
 No live simulator installation is part of the development build process.
+
+## Switching between standalone and MTK
+
+Both installation methods remain supported. Remove the patch with its current
+owner before switching. The installer checks MTK ownership, including shared
+targets, before it writes. Original standalone backups must remain complete;
+identical payload files alone do not prove ownership. Keep the receipt, backups
+and transaction journal if an operation is blocked. Use this installer's
+`recover` command for its interrupted transactions.

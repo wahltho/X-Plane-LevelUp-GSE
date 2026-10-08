@@ -7,8 +7,8 @@ PACKAGE='jt8d17.levelup-737ng.gse'
 SCRIPT='plugins/xlua/scripts/LU_737NG.GSE'
 SCOPES=['objects/GSE','objects/LU_GSE_stairs',SCRIPT]
 def sha(b):return hashlib.sha256(b).hexdigest()
-def build():
- out=ROOT/'dist'/('levelup-gse-'+VERSION)
+def build(destination=None):
+ out=(Path(destination) if destination is not None else ROOT/'dist')/('levelup-gse-'+VERSION)
  if out.exists():shutil.rmtree(out)
  out.mkdir(parents=True)
  previous=json.loads((ROOT/'packaging/previous_payloads.json').read_text())
@@ -29,7 +29,7 @@ def build():
  manifest=dict(schemaVersion=4,packageType='compatibilityPackage',packageId=PACKAGE,packageVersion=VERSION,repositoryUrl='https://github.com/wahltho/X-Plane-LevelUp-GSE',aircraftFamily='LevelUp 737NG',supportedProducts=['levelup-737ng'],supportedUpstreamReleases=[],restartRequired=True,modules=[module])
  (out/'package-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
  (out/'profiles.json').write_text(json.dumps(profiles,indent=2)+'\n')
- for name in ['z_Install.py','README.md','INSTALLATION.md','LICENSE']:
+ for name in ['z_Install.py','standalone_guard.py','standalone-ownership.json','README.md','INSTALLATION.md','LICENSE']:
   if (ROOT/name).is_file():shutil.copy2(ROOT/name,out/name)
  archive=out.parent/(out.name+'.zip')
  with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:

@@ -1,12 +1,15 @@
-import importlib.util,json,tempfile,unittest,shutil,hashlib,os,subprocess
+import importlib.util,json,tempfile,unittest,shutil,hashlib,os,subprocess,sys
+from unittest.mock import patch
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
 def load(name,path):
  s=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
 installer=load('installer',ROOT/'z_Install.py');builder=load('builder',ROOT/'tools/build_package.py')
 class PackageTests(unittest.TestCase):
  @classmethod
- def setUpClass(cls):cls.package=builder.build()
+ def setUpClass(cls):
+  cls.distribution=tempfile.TemporaryDirectory(prefix="gse-test-package-");cls.addClassCleanup(cls.distribution.cleanup);cls.package=builder.build(Path(cls.distribution.name))
  def test_option_b_package_has_complete_mtk_scope_contract(self):
   m=json.loads((self.package/'package-manifest.json').read_text())
   self.assertEqual(m['schemaVersion'],4)
@@ -60,7 +63,7 @@ class PackageTests(unittest.TestCase):
   self.run_install('uninstall')
   self.assertEqual(native.read_bytes(),original)
  def setUp(self):
-  self.temp=tempfile.TemporaryDirectory();self.base=Path(self.temp.name);self.root=self.base/'aircraft';self.root.mkdir();self.pkg=self.base/'package';shutil.copytree(self.package,self.pkg)
+  self.temp=tempfile.TemporaryDirectory();self.base=Path(self.temp.name).resolve();self.root=self.base/'aircraft';self.root.mkdir();self.pkg=self.base/'package';shutil.copytree(self.package,self.pkg)
   p=json.loads((self.pkg/'profiles.json').read_text());variant=next(iter(p['variants'].values()));variant['door_object']={'path':'objects/test.obj','sha256':installer.sha(b'fixture')}
   p['variants']={'737_60NG.acf':variant};(self.pkg/'profiles.json').write_text(json.dumps(p))
   lines=[f'P {k} {v}' for k,v in (variant['signature']|variant['object_signature']).items()]
@@ -148,4 +151,25 @@ class PackageTests(unittest.TestCase):
   from unittest.mock import patch
   with patch.object(installer.subprocess,'check_output',return_value='/Applications/X-Plane.app/Contents/MacOS/X-Plane\n'):
    with self.assertRaises(installer.InstallError):installer.ensure_offline()
+ def test_cli_uses_the_new_contract_with_native_lock(self):
+  for command in ('check','install','verify','install','uninstall'):
+   result=subprocess.run([sys.executable,str(self.pkg/'z_Install.py'),command,'--aircraft-root',str(self.root)],capture_output=True,text=True)
+   self.assertEqual(result.returncode,0,result.stdout+result.stderr)
+   self.assertFalse((self.root/'.levelup-gse-install.lock').exists())
+  self.assertFalse((self.root/installer.STATE).exists())
+ def test_mtk_group_ownership_blocks_before_native_transaction(self):
+  state=self.base/'mtk-state.json'
+  state.write_text(json.dumps(dict(SchemaVersion=10,ContentInstallations={str(self.root):dict(ContentComponents={
+   'maintenance':dict(Sources=[dict(PackageId=installer.PACKAGE_ID)],Files=[dict(RelativePath=installer.SCRIPT_DIR+'/geometry.lua')])})})))
+  with patch.dict(os.environ,MTK_STATE_PATH=str(state)):
+   with self.assertRaisesRegex(installer.InstallError,'MTK manages'):
+    self.run_install('install')
+  self.assertFalse((self.root/installer.STATE).exists())
+  self.assertFalse((self.root/installer.SCRIPT_DIR).exists())
+ def test_partial_state_or_stale_lock_blocks_before_writes(self):
+  for evidence in (installer.STATE,'.levelup-gse-install.lock'):
+   p=self.root/evidence;p.mkdir()
+   with self.assertRaises(installer.InstallError):self.run_install('install')
+   self.assertFalse((self.root/installer.SCRIPT_DIR).exists())
+   p.rmdir()
 if __name__=='__main__':unittest.main()

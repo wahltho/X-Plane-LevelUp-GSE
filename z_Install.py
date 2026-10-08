@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Standalone LevelUp GSE installer. Python 3.10+, standard library only."""
 import argparse
+from contextvars import ContextVar
+from standalone_guard import Guard, OwnershipError, check_mtk
+
+_ownership = ContextVar("gse_ownership", default=None)
 import hashlib
 import json
 import os
@@ -67,6 +71,9 @@ def scope(root, relative):
 
 
 def atomic(root, relative, data):
+    owner = _ownership.get()
+    if owner is not None:
+        owner.recheck_mtk()
     path = safe(root, relative)
     if data is None:
         path.unlink(missing_ok=True)
@@ -237,13 +244,29 @@ def transact(root,changes,old_scopes,restore_directories=None):
         for p,b in changes.items():
             if sha(read(root,p))!=j['before'][p]:raise InstallError('Concurrent file change: '+p)
             atomic(root,p,b)
+        owner = _ownership.get()
+        if owner is not None:
+            owner.recheck_mtk()
+        for directory, old in old_scopes.items():
+            expected = dict(old or {})
+            for path, content in changes.items():
+                if str(PurePosixPath(path).parent) == directory:
+                    if content is None:
+                        expected.pop(path, None)
+                    else:
+                        expected[path] = sha(content)
+            actual = scope(root, directory)
+            if (actual or {}) != expected:
+                raise InstallError('Scope changed during installation: ' + directory)
+        if restore_directories is None:
+            load_state(root)  # Original backups must still be complete before commit.
     except BaseException:
         recovery(root);raise
     j['committed']=True
     atomic(root,txn+'/journal.json',encoded(j))
     finish_transaction(root,j)
 
-def run(command,root,package_root):
+def _run(command,root,package_root):
     if safe(root,STATE+'.completed').exists():cleanup_completed(root)
     if command=='recover':return recovery(root)
     if safe(root,STATE+'/transaction').exists():raise InstallError('Pending transaction; use recover')
@@ -280,6 +303,23 @@ def run(command,root,package_root):
     changes=dict(desired);changes[STATE+'/state.json']=encoded(state)
     transact(root,changes,old);verify(root,state)
     return 'Installed '+m['packageVersion']+'; restart X-Plane.'
+
+def run(command, root, package_root, owner=None):
+    try:
+        if command == 'recover':
+            contract = json.loads((package_root / 'standalone-ownership.json').read_text())
+            policy = contract['policy']
+            check_mtk(root, policy['targetPaths'], policy['packageId'])
+            return _run(command, root, package_root)
+        owner = owner or Guard(root, package_root)
+        owner.recheck()
+        token = _ownership.set(owner)
+        try:
+            return _run(command, root, package_root)
+        finally:
+            _ownership.reset(token)
+    except OwnershipError as error:
+        raise InstallError(str(error)) from error
 
 def ensure_offline():
     if os.name=='nt':
@@ -325,12 +365,17 @@ def main():
         safe(Path(root.anchor),root.relative_to(root.anchor).as_posix())
         if not root.is_dir():raise InstallError('Aircraft directory missing')
         if args.command in ('install','uninstall','recover'):ensure_offline()
+        package_root=Path(__file__).resolve().parent
+        owner=Guard(root,package_root) if args.command!='recover' else None
+        if args.command=='recover':
+            policy=json.loads((package_root/'standalone-ownership.json').read_text())['policy']
+            check_mtk(root,policy['targetPaths'],policy['packageId'])
         lock=acquire(root,args.command=='recover')
         if args.command=='recover' and not safe(root,STATE+'/transaction').exists():
             if safe(root,STATE+'.completed').exists():
                 cleanup_completed(root);print('Completed uninstall cleanup finished.');return 0
             if read(root,STATE+'/state.json') is not None:print('No pending transaction; stale lock cleared.');return 0
-        print(run(args.command,root,Path(__file__).resolve().parent));return 0
+        print(run(args.command,root,package_root,owner));return 0
     except (InstallError,OSError,ValueError,KeyError,TypeError,subprocess.SubprocessError) as e:
         print('GSE: '+str(e),file=sys.stderr);return 1
     finally:
